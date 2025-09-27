@@ -17,3 +17,4 @@ export function validarAutor(titulo) {
 	}
 	return true
 }
+// faltan validadores de libros y usuarios

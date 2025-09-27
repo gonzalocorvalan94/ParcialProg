@@ -1,1 +1,1 @@
-//aca va el crud. 
+//clase que maneja el objeto del libro

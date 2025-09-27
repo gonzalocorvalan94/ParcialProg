@@ -78,4 +78,8 @@ export function validarDireccion(direccion) {
 }
 export function validar(validador) {
 	const input = prompt("Ingrese campo")
+	while (!validador(input)) {
+		input = prompt("Ingrese campo")
+	}
+	return input
 }

@@ -7,6 +7,8 @@ import {
 	validarEmail,
 	validarNombre,
 	validarNumero,
+	validarDireccion,
+	validar,
 } from "../validators/validators.libros.js"
 import fs from "fs"
 import path from "path"

@@ -31,7 +31,7 @@ export function validarGenero(genero) {
 export function validarNombre(nombre) {
 	let clean = titulo.trim()
 	if (!clean || typeof clean != "string" || clean.length < 3) {
-		console.log("Nombre no valido")
+		console.error("Nombre no valido")
 
 		return false
 	}
@@ -45,15 +45,17 @@ export function validarEmail(email) {
 		"@hotmail.com",
 		"@hotmail.com.ar",
 	]
-	const ExpresionRegular = new RegExp(dominios.join("|"), "gi")
+	const ExpresionRegular = new RegExp(`(${dominios.join("|")})$`, "gi")
+
 	//gi para que busque globalmente y sin excepciones de mayusculas o minusculas
+	//$ para que sea el final del string
 	if (!clean || typeof clean != "string" || clean.length <= 10) {
-		console.log("Email no valido")
+		console.error("Email no valido")
 		return false
 	}
 	//si pasa la condicion se verifica que tenga un formato valido
 	if (ExpresionRegular.test(clean) === false) {
-		console.log("Email no valido")
+		console.error("Email no valido")
 		return false
 	} else {
 		return true
@@ -62,7 +64,7 @@ export function validarEmail(email) {
 // console.log(validarEmail("gaspar@gmail.com")) devuelve true
 export function validarNumero(telefono) {
 	if (!telefono || typeof telefono != "number" || telefono.length < 9) {
-		console.log("Telefono no valido")
+		console.error("Telefono no valido")
 		return false
 	}
 	return true
@@ -70,7 +72,7 @@ export function validarNumero(telefono) {
 export function validarDireccion(direccion) {
 	let clean = titulo.trim()
 	if (!clean || typeof clean != "string" || clean.length < 3) {
-		console.log("Direccion no valida")
+		console.error("Direccion no valida")
 
 		return false
 	}

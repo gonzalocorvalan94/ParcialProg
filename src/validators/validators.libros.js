@@ -4,7 +4,6 @@ import chalk from "chalk"
 export function validarTitulo(titulo) {
 	let clean = titulo.trim()
 	if (!clean || typeof clean != "string") {
-		console.error("Titulo no valido")
 		return false
 	}
 	return true

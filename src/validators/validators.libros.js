@@ -5,7 +5,7 @@ import { type } from "os"
 import prompt from "prompt-sync"
 export function validarTitulo(titulo) {
 	let clean = titulo.trim()
-	if (!clean || typeof clean != "string") {
+	if (!clean) {
 		console.error("Titulo no valido")
 		return false
 	}
@@ -13,7 +13,7 @@ export function validarTitulo(titulo) {
 }
 export function validarAutor(titulo) {
 	let clean = titulo.trim()
-	if (!clean || typeof clean != "string" || clean.length < 3) {
+	if (!clean || clean.length < 3) {
 		console.error("Autor no valido")
 		return false
 	}
@@ -21,7 +21,7 @@ export function validarAutor(titulo) {
 }
 export function validarGenero(genero) {
 	let clean = titulo.trim()
-	if (!clean || typeof clean != "string" || clean.length < 3) {
+	if (!clean || clean.length < 3) {
 		console.error("Genero no valido")
 		return false
 	}
@@ -30,7 +30,7 @@ export function validarGenero(genero) {
 // usuarios
 export function validarNombre(nombre) {
 	let clean = titulo.trim()
-	if (!clean || typeof clean != "string" || clean.length < 3) {
+	if (!clean || clean.length < 3) {
 		console.error("Nombre no valido")
 
 		return false
@@ -49,7 +49,7 @@ export function validarEmail(email) {
 
 	//gi para que busque globalmente y sin excepciones de mayusculas o minusculas
 	//$ para que sea el final del string
-	if (!clean || typeof clean != "string" || clean.length <= 10) {
+	if (!clean || clean.length <= 10) {
 		console.error("Email no valido")
 		return false
 	}
@@ -71,7 +71,7 @@ export function validarNumero(telefono) {
 }
 export function validarDireccion(direccion) {
 	let clean = titulo.trim()
-	if (!clean || typeof clean != "string" || clean.length < 3) {
+	if (!clean || clean.length < 3) {
 		console.error("Direccion no valida")
 
 		return false

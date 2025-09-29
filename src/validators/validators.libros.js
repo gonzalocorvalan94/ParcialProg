@@ -2,7 +2,7 @@
 // el validador retornara true o false
 import chalk from "chalk"
 import { type } from "os"
-import prompt from "prompt-sync"
+import Promptsync from "prompt-sync"
 export function validarTitulo(titulo) {
 	let clean = titulo.trim()
 	if (!clean) {

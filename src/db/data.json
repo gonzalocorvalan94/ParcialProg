@@ -1,0 +1,55 @@
+{
+	"libros": [
+		{
+			"titulo": "Cien años de soledad",
+			"autor": "Gabriel García Márquez",
+			"genero": "Novela",
+			"stock": 4,
+			"precio": 1200
+		},
+		{
+			"titulo": "El principito",
+			"autor": "Antoine de Saint-Exupéry",
+			"genero": "Infantil",
+			"stock": 6,
+			"precio": 800
+		},
+		{
+			"titulo": "1984",
+			"autor": "George Orwell",
+			"genero": "Ciencia Ficción",
+			"stock": 3,
+			"precio": 1000
+		}
+	],
+	"clientes": [
+		{
+			"nombre": "Juan Pérez",
+			"dni": "12345678",
+			"telefono": "111222",
+			"direccion": "Calle Falsa 123"
+		},
+		{
+			"nombre": "María Gómez",
+			"dni": "87654321",
+			"telefono": "333444",
+			"direccion": "Av. Siempreviva 742"
+		}
+	],
+	"prestamos": [
+		{
+			"cliente": "Juan Pérez",
+			"libros": ["Cien años de soledad"],
+			"fecha_de_entrega": "20/9/2025",
+			"fecha_de_devolucion": "25/9/2025",
+			"total": 1200
+		},
+		{
+			"cliente": "María Gómez",
+			"libros": ["El principito"],
+			"fecha_de_entrega": "22/9/2025",
+			"fecha_de_devolucion": "5/10/2025",
+			"total": 800
+		}
+	]
+}

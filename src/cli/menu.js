@@ -27,7 +27,7 @@ export function menu() {
 
       mostrarMenuAdmin();
 
-      const opcion_admin = prompt('Ingrese una opción: '); //no usemos number, no es necesario.
+      const opcion_admin = prompt(chalk.blue('Ingrese una opción: ')); //no usemos number, no es necesario.
 
       activo = manejarMenuAdmin(opcion_admin); //aca manejamos la actividad del bucle. Esta funcion devuelve true, salvo que elija salir, que devuelve falso y corta el menu
     } else {

@@ -11,8 +11,8 @@ export function validarTitulo(titulo) {
 	}
 	return true
 }
-export function validarAutor(titulo) {
-	let clean = titulo.trim()
+export function validarAutor(autor) {
+	let clean = autor.trim()
 	if (!clean || clean.length < 3) {
 		console.error("Autor no valido")
 		return false
@@ -20,7 +20,7 @@ export function validarAutor(titulo) {
 	return true
 }
 export function validarGenero(genero) {
-	let clean = titulo.trim()
+	let clean = genero.trim()
 	if (!clean || clean.length < 3) {
 		console.error("Genero no valido")
 		return false
@@ -29,7 +29,7 @@ export function validarGenero(genero) {
 }
 // usuarios
 export function validarNombre(nombre) {
-	let clean = titulo.trim()
+	let clean = nombre.trim()
 	if (!clean || clean.length < 3) {
 		console.error("Nombre no valido")
 

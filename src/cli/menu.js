@@ -1,76 +1,41 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
+import { manejarMenuAdmin, mostrarMenuAdmin } from '../utils/menuAdmin.js';
+import {
+  manejarMenuUsuario,
+  mostrarMenuUsuario,
+} from '../utils/menuUsuario.js';
 
 const prompt = PromptSync();
-const passwd = 'admin';
-let salir = true;
+const PASSWORD = 'admin';
+let activo = true;
 
-while (salir) {
-  console.log(
-    chalk.blue(`
-    --- Bienvenidos a nuestra biblioteca ---
-    
-    Seleccione una opción (1-4)
+export function menu() {
+  while (activo) {
+    //este bucle hace que siempre se muestre el menu a menos que toque la opcion de salir. Se podria ver despues como manejar esto. Pero de momento que quede asi.
 
-    1. Listar libros
-    2. Consultar libro por nombre
-    3. Devolver libro
-    4. Salir
+    mostrarMenuUsuario(); //mostramos menu del usuario comun
 
-    Si usted es administrador, escriba la contraseña.
-    `)
-  );
+    const opcion = prompt(
+      chalk.blue(
+        'Ingrese una opción o ingrese la contraseña de administrador: '
+      )
+    ); //no usemos number, porque no podria ingresar al menu de administrador si escribe "admin", ya que es un string
 
-  const opcion = prompt(chalk.blue("Ingrese una opción: "));
+    if (opcion === PASSWORD) {
+      //si escribe admin, mostramos el menu de administrador
 
-  
-  if (opcion === passwd) {
-    console.log(chalk.green(`
-      --- Menú del Administrador ---
-      1. Listar libros
-      2. Agregar libro
-      3. Modificar libro
-      4. Eliminar libro
-      5. Salir
-    `));
+      mostrarMenuAdmin();
 
-    const opcion_admin = prompt(chalk.blue("Ingrese una opción (1-5): "));
+      const opcion_admin = prompt('Ingrese una opción: '); //no usemos number, no es necesario.
 
-    switch (opcion_admin) {
-      case "1":
-        //funcion de listar libros
-        break;
-      case "2":
-        //funcion de agregar libro
-        break;
-      case "3":
-        //funcion de moficiar libro
-        break;
-      case "4":
-        //funcion de eliminar libro
-        break;
-      case "5":
-        salir = false;
-        break;
-      default:
-        console.log(chalk.red("Opción inválida"));
-    }
-  } else {
-    switch (opcion) {
-      case "1":
-        //funcion de listar libros
-        break;
-      case "2":
-        //funcion de consultar libro por nombre
-        break;
-      case "3":
-        //funcion de devolver libro
-        break;
-      case "4":
-        salir = false;
-        break;
-      default:
-        console.log(chalk.red("Opción inválida (usuario)"));
+      activo = manejarMenuAdmin(opcion_admin); //aca manejamos la actividad del bucle. Esta funcion devuelve true, salvo que elija salir, que devuelve falso y corta el menu
+    } else {
+      //sino, mostramos el menu de usuario
+
+      activo = manejarMenuUsuario(opcion); //aca manejamos la actividad del bucle. Esta funcion devuelve true, salvo que elija salir, que devuelve falso y corta el menu
     }
   }
 }
+
+menu();

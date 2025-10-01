@@ -1,6 +1,7 @@
 {
   "libros": [
     {
+      "id": 1,
       "titulo": "Cien años de soledad",
       "autor": "Gabriel García Márquez",
       "genero": "Novela",
@@ -8,6 +9,7 @@
       "precio": 1200
     },
     {
+      "id": 2,
       "titulo": "El principito",
       "autor": "Antoine de Saint-Exupéry",
       "genero": "Infantil",
@@ -15,6 +17,7 @@
       "precio": 800
     },
     {
+      "id": 3,
       "titulo": "1984",
       "autor": "George Orwell",
       "genero": "Ciencia Ficción",
@@ -24,26 +27,32 @@
   ],
   "clientes": [
     {
-      "id": 1,
       "nombre": "Juan Pérez",
-      "libros_prestados": ["Cien años de soledad"],
       "dni": "12345678",
       "telefono": "111222",
-      "direccion": "Calle Falsa 123",
-      "fecha_de_entrega": "20/9/2025",
-      "fecha_de_devolucion": "25/9/2025",
-      "precio_pagado": 1200
+      "direccion": "Calle Falsa 123"
     },
     {
-      "id": 2,
       "nombre": "María Gómez",
-      "libros_prestados": ["El principito"],
       "dni": "87654321",
       "telefono": "333444",
-      "direccion": "Av. Siempreviva 742",
-      "fecha_de_entrega": "22/9/2025",
-      "fecha_de_devolucion": "5/10/2025",
-      "precio_pagado": 800
+      "direccion": "Av. Siempreviva 742"
+    }
+  ],
+  "prestamos": [
+    {
+      "cliente": "Juan Pérez",
+      "libros": ["Cien años de soledad", "1984"],
+      "fechaEntrega": "20/9/2025",
+      "fechaDevolucion": "25/9/2025",
+      "total": 2200
+    },
+    {
+      "cliente": "María Gómez",
+      "libros": ["El principito"],
+      "fechaEntrega": "22/9/2025",
+      "fechaDevolucion": "5/10/2025",
+      "total": 800
     }
   ]
 }

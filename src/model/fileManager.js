@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const filepath = path.join(__dirname, "libros.json"); //(__dirname,'nombre_de_la_db')
+const filepath = path.join(__dirname, "data.json"); //(__dirname,'nombre_de_la_db')
 
 export function leerDatos() {
   try {

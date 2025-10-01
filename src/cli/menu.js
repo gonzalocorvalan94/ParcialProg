@@ -14,8 +14,6 @@ export function menu() {
   while (activo) {
     //este bucle hace que siempre se muestre el menu a menos que toque la opcion de salir. Se podria ver despues como manejar esto. Pero de momento que quede asi.
 
-    mostrarMenuUsuario(); //mostramos menu del usuario comun
-
     const opcion = prompt(
       chalk.blue(
         'Ingrese una opción o ingrese la contraseña de administrador: '

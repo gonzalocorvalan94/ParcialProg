@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
+import { manejarMenuAdmin, mostrarMenuAdmin } from './menuAdmin.js';
 
 const prompt = PromptSync();
 
@@ -9,8 +10,9 @@ export function mostrarMenuUsuario() {
   --- Biblioteca ---
   1. Listar libros
   2. Consultar libro por nombre
-  3. Devolver libro
-  4. Salir
+  3. Solicitar libro
+  4. Devolver libro
+  5. Salir
   `)
   );
 }
@@ -25,13 +27,18 @@ export function manejarMenuUsuario(opcion) {
       case '2':
         /* consultar */ break;
       case '3':
-        /* devolver */ break;
+        /* pedir*/ break;
       case '4':
+        /* devolver */ 
+      case '5':
         console.log(chalk.green('Hasta luego!'));
         return false; //retornamos falso para que corte el bucle. No hace falta el break, el return mata todo
-
+      case 'admin':
+        mostrarMenuAdmin();
+        manejarMenuAdmin();
+        return seguirEnUsuario = false;
       default:
-        console.log(chalk.red('Opción inválida'));
+        console.log(chalk.red('Opción inválida222'));
     }
 
     if (seguirEnUsuario) {

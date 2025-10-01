@@ -3,10 +3,12 @@
 import chalk from "chalk"
 import { type } from "os"
 import Promptsync from "prompt-sync"
+import { PASSWORD } from "../cli/menu.js"
+
 export function validarTitulo(titulo) {
 	let clean = titulo.trim()
 	if (!clean) {
-		console.error("Titulo no valido")
+		console.error(chalk.red("Titulo no valido"))
 		return false
 	}
 	return true
@@ -14,7 +16,7 @@ export function validarTitulo(titulo) {
 export function validarAutor(autor) {
 	let clean = autor.trim()
 	if (!clean || clean.length < 3) {
-		console.error("Autor no valido")
+		console.error(chalk.red("Autor no valido"))
 		return false
 	}
 	return true
@@ -22,7 +24,7 @@ export function validarAutor(autor) {
 export function validarGenero(genero) {
 	let clean = genero.trim()
 	if (!clean || clean.length < 3) {
-		console.error("Genero no valido")
+		console.error(chalk.red("Genero no valido"))
 		return false
 	}
 	return true
@@ -31,7 +33,7 @@ export function validarGenero(genero) {
 export function validarNombre(nombre) {
 	let clean = nombre.trim()
 	if (!clean || clean.length < 3) {
-		console.error("Nombre no valido")
+		console.error(chalk.red("Nombre no valido"))
 
 		return false
 	}
@@ -50,12 +52,12 @@ export function validarEmail(email) {
 	//gi para que busque globalmente y sin excepciones de mayusculas o minusculas
 	//$ para que sea el final del string
 	if (!clean || clean.length <= 10) {
-		console.error("Email no valido")
+		console.error(chalk.red("Email no valido"))
 		return false
 	}
 	//si pasa la condicion se verifica que tenga un formato valido
 	if (ExpresionRegular.test(clean) === false) {
-		console.error("Email no valido")
+		console.error(chalk.red("Email no valido"))
 		return false
 	} else {
 		return true
@@ -64,24 +66,23 @@ export function validarEmail(email) {
 // console.log(validarEmail("gaspar@gmail.com")) devuelve true
 export function validarNumero(telefono) {
 	if (!telefono || typeof telefono != "number" || telefono.length < 9) {
-		console.error("Telefono no valido")
+		console.error(chalk.red("Telefono no valido"))
 		return false
 	}
 	return true
 }
 export function validarDireccion(direccion) {
-	let clean = titulo.trim()
+	let clean = direccion.trim()
 	if (!clean || clean.length < 3) {
-		console.error("Direccion no valida")
+		console.error(chalk.red("Direccion no valida"))
 
 		return false
 	}
 	return true
 }
-export function validar(validador) {
-	const input = prompt("Ingrese campo")
-	while (!validador(input)) {
-		input = prompt("Ingrese campo")
-	}
-	return input
+export function esOpcionValidaUsuario(opcion) {
+  const validas = ['1','2','3','4','5', PASSWORD];
+  return validas.includes(opcion);
 }
+
+

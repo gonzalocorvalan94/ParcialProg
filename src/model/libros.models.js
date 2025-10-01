@@ -1,1 +1,0 @@
-//clase que maneja el objeto del libro

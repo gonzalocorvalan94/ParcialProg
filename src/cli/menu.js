@@ -1,37 +1,35 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
-import { manejarMenuAdmin, mostrarMenuAdmin } from '../utils/menuAdmin.js';
-import {
-  manejarMenuUsuario,
-  mostrarMenuUsuario,
-} from '../utils/menuUsuario.js';
+import { manejarMenuAdmin } from './menuAdmin.js';
+import { manejarMenuUsuario, mostrarMenuUsuario } from './menuUsuario.js';
+import { esOpcionValidaUsuario } from '../validators/validators.libros.js';
 
 const prompt = PromptSync();
-const PASSWORD = 'admin';
+export const PASSWORD = 'admin';
 let activo = true;
 
 export function menu() {
   while (activo) {
-    //este bucle hace que siempre se muestre el menu a menos que toque la opcion de salir. Se podria ver despues como manejar esto. Pero de momento que quede asi.
+    mostrarMenuUsuario();
 
-    const opcion = prompt(
+    let opcion = prompt(
       chalk.blue(
         'Ingrese una opción o ingrese la contraseña de administrador: '
       )
-    ); //no usemos number, porque no podria ingresar al menu de administrador si escribe "admin", ya que es un string
+    );
+
+    while (!esOpcionValidaUsuario(opcion)) {
+      opcion = prompt(
+        chalk.red(
+          'Opción inválida. Ingrese una opción o la contraseña de administrador: '
+        )
+      );
+    }
 
     if (opcion === PASSWORD) {
-      //si escribe admin, mostramos el menu de administrador
-
-      mostrarMenuAdmin();
-
-      const opcion_admin = prompt(chalk.blue('Ingrese una opción: ')); //no usemos number, no es necesario.
-
-      activo = manejarMenuAdmin(opcion_admin); //aca manejamos la actividad del bucle. Esta funcion devuelve true, salvo que elija salir, que devuelve falso y corta el menu
+      activo = manejarMenuAdmin();
     } else {
-      //sino, mostramos el menu de usuario
-
-      activo = manejarMenuUsuario(opcion); //aca manejamos la actividad del bucle. Esta funcion devuelve true, salvo que elija salir, que devuelve falso y corta el menu
+      activo = manejarMenuUsuario(opcion);
     }
   }
 }

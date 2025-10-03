@@ -36,7 +36,9 @@ function devolverLibro(){
 
 //admin
 
-//listar libros, pero ya se gestiona en usuarios
+function listarLibrosAdmin(){
+  
+}
 
 function agregarLibro(){
 //post 

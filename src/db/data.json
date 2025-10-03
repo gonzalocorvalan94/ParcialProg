@@ -41,16 +41,17 @@
     }
   ],
   "prestamos": [
-    {
+    { "id": 1,
       "cliente": "Juan Pérez",
-      "libros": ["Cien años de soledad", "1984"],
+      "libros": "Cien años de soledad",
       "fechaEntrega": "20/9/2025",
       "fechaDevolucion": "25/9/2025",
       "total": 2200
     },
     {
+      "id": 2,
       "cliente": "María Gómez",
-      "libros": ["El principito"],
+      "libros": "El principito",
       "fechaEntrega": "22/9/2025",
       "fechaDevolucion": "5/10/2025",
       "total": 800

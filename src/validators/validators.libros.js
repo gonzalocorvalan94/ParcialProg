@@ -81,8 +81,15 @@ export function validarDireccion(direccion) {
 	return true
 }
 export function esOpcionValidaUsuario(opcion) {
-  const validas = ['1','2','3','4','5', PASSWORD];
-  return validas.includes(opcion);
+	const validas = ["1", "2", "3", "4", "5", PASSWORD]
+	return validas.includes(opcion)
 }
 
-
+export function validar(datoValidar, validador) {
+	let input = prompt("Ingrese " + datoValidar + ": ")
+	while (!validador(input)) {
+		console.log(datoValidar + " inválido, intente nuevamente")
+		input = prompt("Ingrese " + datoValidar + ": ")
+	}
+	return input
+}

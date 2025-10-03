@@ -80,7 +80,7 @@ export function validarDireccion(direccion) {
 	}
 	return true
 }
-function validarPrecio(precio) {
+export function validarPrecio(precio) {
 	if (!precio || typeof precio != "number" || precio <= 0) {
 		console.error(chalk.red("Precio no valido"))
 
@@ -88,7 +88,7 @@ function validarPrecio(precio) {
 	}
 	return true
 }
-function validarStock(stock) {
+export function validarStock(stock) {
 	if (!stock || typeof stock != "number" || stock <= 0) {
 		console.error(chalk.red("Stock no valido"))
 

@@ -80,6 +80,22 @@ export function validarDireccion(direccion) {
 	}
 	return true
 }
+function validarPrecio(precio) {
+	if (!precio || typeof precio != "number" || precio <= 0) {
+		console.error(chalk.red("Precio no valido"))
+
+		return false
+	}
+	return true
+}
+function validarStock(stock) {
+	if (!stock || typeof stock != "number" || stock <= 0) {
+		console.error(chalk.red("Stock no valido"))
+
+		return false
+	}
+	return true
+}
 export function esOpcionValidaUsuario(opcion) {
 	const validas = ["1", "2", "3", "4", "5", PASSWORD]
 	return validas.includes(opcion)

@@ -16,7 +16,26 @@ import path from "path"
 
 
 
-//usuarios
+
+
+//Registro de usuario
+
+function listarClientes(){
+
+}
+
+function regristrarCliente(){
+  //post de nuevo usuario
+}
+
+function modificarCliente(){
+
+}
+function eliminarCliente(){
+
+}
+
+//prestamo de usuario
 
 function listarLibros(){
 //esto es un get
@@ -27,11 +46,11 @@ function consultarPorNombre(){
 }
 
 function crearPrestamo(){
-//post por nombre
+//post por nombre y datos de usuario
 }
 
 function devolverLibro(){
-//delete por id
+//delete dni de usuario y nombre del libro
 }
 
 //admin

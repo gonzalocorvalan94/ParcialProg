@@ -82,7 +82,30 @@ export function modificarCliente() {
   console.log(chalk.green("Usuario modificado correctamente"));
 }
 
-function eliminarCliente() {}
+function eliminarCliente() {
+  const data = leerDatos();
+
+  const usuarioDNI = validar("DNI del usuario", validarDNI);
+
+  const index = data.clientes.findIndex(usuario => usuario.DNI === usuarioDNI);
+
+  if (index === -1) {
+    console.log(chalk.red("Usuario no encontrado"));
+    return;
+  }
+
+  const confirmacion = prompt(chalk.red("¿Está seguro que desea eliminar al usuario? (s/n): "));
+  if (confirm.toLowerCase() !== 's') {
+    console.log(chalk.blue("Operación cancelada"));
+    return;
+  }
+
+  data.clientes.splice(index,1);
+  guardar(data);
+
+  console.log(chalk.green("Usuario eliminado correctamente"));
+}
+
 
 //prestamo de usuario
 

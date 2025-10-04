@@ -9,7 +9,7 @@ import {
   validarNumero,
   validarDireccion,
   validarDNI,
-  validar
+  validar,
 } from '../validators/validators.libros.js';
 import fs from 'fs';
 import path from 'path';
@@ -45,10 +45,10 @@ function listarUsuarios() {
 export function registrarCliente() {
   const data = leerDatos();
 
-  const nombre = validar(chalk.blue("Ingrese el nombre del usuario: "), validarNombre);
-  const DNI = validar(chalk.blue("Ingrese el DNI del usuario: "), validarDNI);
-  const tel = validar(chalk.blue("Ingrese el teléfono del usuario: "), validarNumero);
-  const direccion = validar(chalk.blue("Ingrese la dirección del usuario: "), validarDireccion);
+  const nombre = validar("nombre del usuario", validarNombre);
+  const DNI = validar("DNI del usuario", validarDNI);
+  const tel = validar("teléfono del usuario", validarNumero);
+  const direccion = validar("dirección del usuario", validarDireccion);
 
   const nuevoCliente = new Usuario(nombre, DNI, tel, direccion);
   data.clientes.push(nuevoCliente);
@@ -57,7 +57,31 @@ export function registrarCliente() {
   console.log(chalk.green(`Se creó el cliente correctamente`));
 }
 
-function modificarCliente() {}
+export function modificarCliente() {
+  const data = leerDatos();
+
+  const usuarioDNI = prompt(chalk.blue("Ingrese el DNI del usuario que desea modificar: "));
+
+  const index = data.clientes.findIndex(usuario => usuario.DNI === usuarioDNI);
+
+  if (index === -1) {
+    console.log(chalk.red("Usuario no encontrado"));
+    return;
+  }
+
+  const nombre = validar("nombre del usuario", validarNombre);
+  const DNI = validar("DNI del usuario", validarDNI);
+  const tel = validar("teléfono del usuario", validarNumero);
+  const direccion = validar("dirección del usuario", validarDireccion);
+
+  const usuarioModificado = new Usuario(nombre, DNI, tel, direccion);
+  data.clientes[index] = usuarioModificado;
+
+  guardar(data);
+
+  console.log(chalk.green("Usuario modificado correctamente"));
+}
+
 function eliminarCliente() {}
 
 //prestamo de usuario

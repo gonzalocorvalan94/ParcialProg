@@ -13,15 +13,30 @@ import {
 import fs from "fs"
 import path from "path"
 // funcion para leer el archivo. Devuelve todo el objeto del archivo data.json
-
-
+import PromptSync from 'prompt-sync';
+import { leerDatos, guardar} from "../db/fileManager.js";
+const prompt = PromptSync();
+import chalk from "chalk";
 
 
 
 //Registro de usuario
 
-function listarClientes(){
+function listarUsuarios(){
+  let data = leerDatos();
 
+  const clientes = data.clientes;
+
+  if(!clientes || clientes.length === 0){
+  console.error(chalk.red("No hay clientes registrados"))
+  return;
+  }
+
+  clientes.forEach((usuarios, index) => {
+    console.log(chalk.blue(`
+      ${index + 1}. ${clientes.nombre} - DNI: ${clientes.dni} - Tel: ${clientes.telefono} - Dirección: ${clientes.direccion}
+      `))
+  });
 }
 
 function regristrarCliente(){

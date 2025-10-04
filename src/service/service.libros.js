@@ -9,6 +9,7 @@ import {
   validarNumero,
   validarDireccion,
   validarDNI,
+  validar
 } from '../validators/validators.libros.js';
 import fs from 'fs';
 import path from 'path';
@@ -41,32 +42,13 @@ function listarUsuarios() {
   });
 }
 
-function registrarCliente() {
+export function registrarCliente() {
   const data = leerDatos();
 
-  let nombre = prompt(chalk.blue(`Ingrese el nombre del usuario: `));
-  while (!validarNombre(nombre)) {
-    nombre = prompt(chalk.red(`Ingrese un nombre válido: `));
-  }
-
-  let DNI = prompt(chalk.blue(`Ingrese el DNI del usuario: `));
-  while (!validarDNI(DNI)) {
-    DNI = prompt(chalk.red(`Ingrese un DNI válido: `));
-  }
-
-  let tel = prompt(chalk.blue(`Ingrese el teléfono del usuario: `));
-  while (!validarNumero(tel)) {
-    tel = prompt(
-      chalk.red(`Teléfono inválido. Ingrese nuevamente (solo números)`)
-    );
-  }
-
-  let direccion = prompt(chalk.blue(`Ingrese la dirección del usuario: `));
-  while (!validarDireccion(direccion)) {
-    direccion = prompt(
-      chalk.red(`Dirección inválida. Ingrese una dirección válida`)
-    );
-  }
+  const nombre = validar(chalk.blue("Ingrese el nombre del usuario: "), validarNombre);
+  const DNI = validar(chalk.blue("Ingrese el DNI del usuario: "), validarDNI);
+  const tel = validar(chalk.blue("Ingrese el teléfono del usuario: "), validarNumero);
+  const direccion = validar(chalk.blue("Ingrese la dirección del usuario: "), validarDireccion);
 
   const nuevoCliente = new Usuario(nombre, DNI, tel, direccion);
   data.clientes.push(nuevoCliente);

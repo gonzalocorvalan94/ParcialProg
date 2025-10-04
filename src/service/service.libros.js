@@ -47,15 +47,29 @@ export function registrarCliente() {
 
   const nombre = validar("nombre del usuario", validarNombre);
   const DNI = validar("DNI del usuario", validarDNI);
+
+  
+  if (data.clientes.some(cliente => cliente.DNI === DNI)) {
+    console.log(chalk.red("Ya existe un cliente con ese DNI."));
+    return;
+  }
+
   const tel = validar("teléfono del usuario", validarNumero);
   const direccion = validar("dirección del usuario", validarDireccion);
+
+  const confirmacion = prompt(chalk.red("¿Está seguro que desea registrar el usuario? (s/n): "));
+  if (confirmacion.toLowerCase() !== 's') {
+    console.log(chalk.blue("Operación cancelada"));
+    return;
+  }
 
   const nuevoCliente = new Usuario(nombre, DNI, tel, direccion);
   data.clientes.push(nuevoCliente);
   guardar(data);
 
-  console.log(chalk.green(`Se creó el cliente correctamente`));
+  console.log(chalk.green("Se creó el cliente correctamente"));
 }
+
 
 export function modificarCliente() {
   const data = leerDatos();
@@ -74,6 +88,12 @@ export function modificarCliente() {
   const tel = validar("teléfono del usuario", validarNumero);
   const direccion = validar("dirección del usuario", validarDireccion);
 
+  const confirmacion = prompt(chalk.red("¿Está seguro que desea modificar el usuario? (s/n): "));
+  if (confirmacion.toLowerCase() !== 's') {
+    console.log(chalk.blue("Operación cancelada"));
+    return;
+  }
+
   const usuarioModificado = new Usuario(nombre, DNI, tel, direccion);
   data.clientes[index] = usuarioModificado;
 
@@ -82,7 +102,8 @@ export function modificarCliente() {
   console.log(chalk.green("Usuario modificado correctamente"));
 }
 
-function eliminarCliente() {
+
+export function eliminarCliente() {
   const data = leerDatos();
 
   const usuarioDNI = validar("DNI del usuario", validarDNI);
@@ -95,12 +116,12 @@ function eliminarCliente() {
   }
 
   const confirmacion = prompt(chalk.red("¿Está seguro que desea eliminar al usuario? (s/n): "));
-  if (confirm.toLowerCase() !== 's') {
+  if (confirmacion.toLowerCase() !== 's') {
     console.log(chalk.blue("Operación cancelada"));
     return;
   }
 
-  data.clientes.splice(index,1);
+  data.clientes.splice(index, 1);
   guardar(data);
 
   console.log(chalk.green("Usuario eliminado correctamente"));

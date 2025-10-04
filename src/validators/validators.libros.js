@@ -99,3 +99,32 @@ export function esOpcionValidaUsuario(opcion) {
   const validas = ['1', '2', '3', '4', '5', PASSWORD];
   return validas.includes(opcion);
 }
+export function validarPrecio(precio) {
+	if (!precio || typeof precio != "number" || precio <= 0) {
+		console.error(chalk.red("Precio no valido"))
+
+		return false
+	}
+	return true
+}
+export function validarStock(stock) {
+	if (!stock || typeof stock != "number" || stock <= 0) {
+		console.error(chalk.red("Stock no valido"))
+
+		return false
+	}
+	return true
+}
+export function esOpcionValidaUsuario(opcion) {
+	const validas = ["1", "2", "3", "4", "5", PASSWORD]
+	return validas.includes(opcion)
+}
+
+export function validar(datoValidar, validador) {
+	let input = prompt("Ingrese " + datoValidar + ": ")
+	while (!validador(input)) {
+		console.log(datoValidar + " inválido, intente nuevamente")
+		input = prompt("Ingrese " + datoValidar + ": ")
+	}
+	return input
+}

@@ -10,12 +10,12 @@ export class Libro {
     this.stock = stock;
     this.precio = precio;
   }
-  disminuirStock() {
-    if (this.stock > 0) {
-      this.stock -= 1;
-    } else {
-      throw new Error(`No hay stock disponible de "${this.titulo}"`);
+  modificarStock(cantidad) {
+    // en cantidad se espera: 1 (suma), -1(resta)
+    if (this.stock + cantidad < 0) {
+      throw new Error(`No hay suficiente stock de "${this.titulo}"`);
     }
+    this.stock += cantidad;
   }
 }
 

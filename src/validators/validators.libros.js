@@ -99,6 +99,15 @@ export function validarStock(stock) {
 	}
 	return true
 }
+export function validarID(id) {
+	let clean = Number(id)
+	if (!clean || clean <= 0) {
+		console.error(chalk.red("ID no valida"))
+
+		return false
+	}
+	return true
+}
 export function esOpcionValidaUsuario(opcion) {
 	const validas = ["1", "2", "3", "4", "5", PASSWORD]
 	return validas.includes(opcion)

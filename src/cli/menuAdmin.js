@@ -10,12 +10,12 @@ export function mostrarMenuAdmin() {
   2. Agregar libro
   3. Modificar libro
   4. Eliminar libro
-  5. Volver al menu anterior
-  6. Salir
+  5. Listar Prestamos
+  6. Volver al menu anterior
+  7. Salir
   `)
   );
 }
-
 
 export function manejarMenuAdmin() {
   let seguirEnAdmin = true;
@@ -27,30 +27,32 @@ export function manejarMenuAdmin() {
 
     switch (opcion_admin) {
       case '1':
-        console.log('Listado de libros...'); //funcion correspondiente
+        console.log(chalk.blue('Listado de libros...')); //funcion correspondiente
         mostrarMenuAdmin(); // mostramos de nuevo solo después de una acción válida
         break;
       case '2':
-        console.log('Agregar libro...'); //funcion correspondiente
+        console.log(chalk.blue('Agregar libro...')); //funcion correspondiente
         mostrarMenuAdmin();
         break;
       case '3':
-        console.log('Modificar libro...'); //funcion correspondiente
+        console.log(chalk.blue('Modificar libro...')); //funcion correspondiente
         mostrarMenuAdmin();
         break;
       case '4':
-        console.log('Eliminar libro...'); //funcion correspondiente
+        console.log(chalk.blue('Eliminar libro...')); //funcion correspondiente
         mostrarMenuAdmin();
         break;
       case '5':
-        seguirEnAdmin = false; // volver al menú usuario
+        console.log(chalk.blue('Listar prestamos')); //funcion correspondiente
         break;
       case '6':
+        seguirEnAdmin = false; // volver al menú usuario
+        break;
+      case '7':
         console.log(chalk.green('Hasta luego!'));
         return false; // cortar todo el programa
       default:
         console.log(chalk.red('Opción inválida. Intente de nuevo.'));
-        
     }
   }
   return true;

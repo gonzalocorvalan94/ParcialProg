@@ -48,14 +48,6 @@ export function validarEmail(email) {
 		"@hotmail.com.ar",
 	]
 	const ExpresionRegular = new RegExp(`(${dominios.join("|")})$`, "gi")
-  const clean = email.trim();
-  const dominios = [
-    '@gmail.com',
-    '@gmail.com.ar',
-    '@hotmail.com',
-    '@hotmail.com.ar',
-  ];
-  const ExpresionRegular = new RegExp(`(${dominios.join('|')})$`, 'gi');
 
   //gi para que busque globalmente y sin excepciones de mayusculas o minusculas
   //$ para que sea el final del string
@@ -79,11 +71,7 @@ export function validarNumero(telefono) {
 		return false
 	}
 	return true
-  if (!telefono || typeof telefono != 'number' || telefono.length < 9) {
-    console.error(chalk.red('Telefono no valido'));
-    return false;
-  }
-  return true;
+  
 }
 export function validarDireccion(direccion) {
   let clean = direccion.trim();

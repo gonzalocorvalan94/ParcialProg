@@ -66,8 +66,8 @@ export function validarEmail(email) {
 }
 // console.log(validarEmail("gaspar@gmail.com")) devuelve true
 export function validarNumero(telefono) {
-	let clean = telefono.trim()
-	if (!clean || clean <= 0) {
+	let clean = Number(telefono.trim())
+	if (!clean || clean <= 6) {
 		console.error(chalk.red("Telefono no valido"))
 		return false
 	}

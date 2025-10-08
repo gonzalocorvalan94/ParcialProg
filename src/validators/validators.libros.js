@@ -2,12 +2,13 @@
 // el validador retornara true o false
 import chalk from "chalk"
 import { type } from "os"
-import Promptsync from "prompt-sync"
+import promptsync from "prompt-sync"
 import { PASSWORD } from "../cli/menu.js"
+let prompt = promptsync()
 
 export function validarTitulo(titulo) {
 	let clean = titulo.trim()
-	if (!clean) {
+	if (!clean || clean.length < 3) {
 		console.error(chalk.red("Titulo no valido"))
 		return false
 	}
@@ -40,7 +41,7 @@ export function validarNombre(nombre) {
 	return true
 }
 export function validarEmail(email) {
-	const clean = email.trim()
+	let clean = email.trim()
 	const dominios = [
 		"@gmail.com",
 		"@gmail.com.ar",
@@ -65,7 +66,8 @@ export function validarEmail(email) {
 }
 // console.log(validarEmail("gaspar@gmail.com")) devuelve true
 export function validarNumero(telefono) {
-	if (!telefono || typeof telefono != "number" || telefono.length < 9) {
+	let clean = Number(telefono.trim())
+	if (!clean || clean <= 6) {
 		console.error(chalk.red("Telefono no valido"))
 		return false
 	}
@@ -80,9 +82,41 @@ export function validarDireccion(direccion) {
 	}
 	return true
 }
+export function validarPrecio(precio) {
+	let clean = Number(precio)
+	if (!clean || clean <= 0) {
+		console.error(chalk.red("Precio no valido"))
+		return false
+	}
+	return true
+}
+export function validarStock(stock) {
+	let clean = Number(stock)
+	if (!clean || clean <= 0) {
+		console.error(chalk.red("Stock no valido"))
+
+		return false
+	}
+	return true
+}
+export function validarID(id) {
+	let clean = Number(id)
+	if (!clean || clean <= 0) {
+		console.error(chalk.red("ID no valida"))
+
+		return false
+	}
+	return true
+}
 export function esOpcionValidaUsuario(opcion) {
-  const validas = ['1','2','3','4','5', PASSWORD];
-  return validas.includes(opcion);
+	const validas = ["1", "2", "3", "4", "5", PASSWORD]
+	return validas.includes(opcion)
 }
 
-
+export function validar(datoValidar, validador) {
+	let input = prompt("Ingrese " + datoValidar + ": ")
+	while (!validador(input)) {
+		input = prompt("Ingrese " + datoValidar + ": ")
+	}
+	return input
+}

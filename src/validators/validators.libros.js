@@ -114,23 +114,6 @@ export function validarFecha(fecha) {
   }
   return true;
 }
-export function validarPrestamoRepetido(cliente, libro, prestamos) {
-  const yaPrestado = prestamos.some(
-    (p) =>
-      p.cliente.dni === cliente.dni &&
-      p.libros.some((l) => l.titulo === libro.titulo)
-  );
-
-  if (yaPrestado) {
-    console.error(
-      chalk.red(
-        `El cliente "${cliente.nombre}" ya tiene prestado el libro "${libro.titulo}".`
-      )
-    );
-    return false;
-  }
-  return true;
-}
 
 export function esOpcionValidaUsuario(opcion) {
   const validas = ["1", "2", "3", "4", "5", PASSWORD];

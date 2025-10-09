@@ -32,12 +32,12 @@ export class Prestamo {
   constructor(id, cliente, libros, fechaEntrega, fechaDevolucion) {
     this.id = id;
     this.cliente = cliente.nombre;
-    this.libros = libros.map((libro) => libro.titulo);
+    this.libros = libros.titulo; //
     this.fechaEntrega = fechaEntrega;
     this.fechaDevolucion = fechaDevolucion;
-    this.total = this.calcularTotal(libros);
+    this.total = this.precio;
   }
   calcularTotal(libros) {
-    return libros.reduce((acc, libro) => acc + libro.precio, 0);
+    return libros.precio;
   }
 }

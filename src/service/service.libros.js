@@ -89,7 +89,7 @@ function crearPrestamo() {
   const nuevoPrestamo = new Prestamo(
     null, //por el id, luego se asigna
     cliente,
-    [libro],
+    libro,
     fechaEntrega,
     fechaDevolucion
   );
@@ -121,7 +121,9 @@ function devolverLibro() {
   }
 
   const indicePrestamo = data.prestamos.findIndex(
-    (p) => p.cliente.dni === dniCliente && p.libros.includes(tituloLibro)
+    (p) =>
+      p.cliente === cliente.nombre &&
+      p.libros.toLowerCase() === tituloLibro.toLocaleLowerCase()
   );
 
   if (indicePrestamo === -1) {
@@ -143,7 +145,7 @@ function devolverLibro() {
   guardar(data);
   console.log(
     chalk.green(
-      `Libro "${tituloLibro}" devuelto por ${nombreCliente} correctamente.`
+      `Libro "${tituloLibro}" devuelto por ${cliente.nombre} correctamente.`
     )
   );
 }

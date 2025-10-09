@@ -2,7 +2,7 @@
   "libros": [
     {
       "id": 1,
-      "titulo": "Cien años de soledad",
+      "titulo": "Cien anios de soledad",
       "autor": "Gabriel García Márquez",
       "genero": "Novela",
       "stock": 4,
@@ -13,7 +13,7 @@
       "titulo": "El principito",
       "autor": "Antoine de Saint-Exupéry",
       "genero": "Infantil",
-      "stock": 4,
+      "stock": 5,
       "precio": 800
     },
     {
@@ -21,7 +21,7 @@
       "titulo": "1984",
       "autor": "George Orwell",
       "genero": "Ciencia Ficción",
-      "stock": 2,
+      "stock": 3,
       "precio": 1000
     }
   ],
@@ -43,7 +43,7 @@
     {
       "id": 1,
       "cliente": "Juan Pérez",
-      "libros": "Cien años de soledad",
+      "libros": "Cien anios de soledad",
       "fechaEntrega": "20/9/2025",
       "fechaDevolucion": "25/9/2025",
       "total": 2200
@@ -57,31 +57,9 @@
       "total": 800
     },
     {
-      "id": 3,
-      "cliente": "Juan Pérez",
-      "libros": [
-        "El principito"
-      ],
-      "fechaEntrega": "05/10/2025",
-      "fechaDevolucion": "05/11/2025",
-      "total": 800
-    },
-    {
-      "id": 4,
-      "cliente": "Juan Pérez",
-      "libros": [
-        "1984"
-      ],
-      "fechaEntrega": "22/10/2025",
-      "fechaDevolucion": "05/11/2025",
-      "total": 1000
-    },
-    {
       "id": 5,
       "cliente": "Juan Pérez",
-      "libros": [
-        "El principito"
-      ],
+      "libros": "El principito",
       "fechaEntrega": "05/10/2025",
       "fechaDevolucion": "05/11/2025",
       "total": 800

@@ -63,31 +63,19 @@ function crearPrestamo() {
     return;
   }
 
-  console.log(chalk.yellow("Libros disponibles"));
-  console.table(data.libros);
-  let libro;
+  const tituloLibro = validar(
+    "Ingrese el titulo del libro a prestar: ",
+    validarTitulo
+  );
+  const libro = data.libros.find(
+    (l) => l.titulo.toLowerCase() === tituloLibro.toLowerCase()
+  );
 
-  do {
-    const tituloLibro = validar(
-      "Ingrese el titulo del libro a prestar: ",
-      validarTitulo
-    );
-    libro = data.libros.find(
-      (l) => l.titulo.toLowerCase() === tituloLibro.toLowerCase()
-    );
-    if (!libro) {
-      console.log(chalk.red("Libro no encontrado."));
-      return;
-    }
-  } while (!libro);
-
-  try {
-    //aparece any en modificicarStock
-    libro.modificarStock(-1); // se quita del stock del libro
-  } catch (err) {
-    console.log(chalk.red("Error al modificar stock: ", err.message));
+  if (libro.stock <= 0) {
+    console.log(chalk.red("No hay stock disponible para este libro."));
     return;
   }
+  libro.stock--;
 
   const fechaEntrega = validar(
     "Ingrese la fecha de entrega(DD/MM/AAAA)",
@@ -99,6 +87,7 @@ function crearPrestamo() {
   );
 
   const nuevoPrestamo = new Prestamo(
+    null, //por el id, luego se asigna
     cliente,
     [libro],
     fechaEntrega,
@@ -117,7 +106,6 @@ function crearPrestamo() {
 
 function devolverLibro() {
   console.log(chalk.green("==============="));
-
   const data = leerDatos();
 
   const dniCliente = validar("Ingrese DNI del cliente: ", validarDNI);
@@ -132,31 +120,25 @@ function devolverLibro() {
     return;
   }
 
-  //funcion buscarprestamo=>
   const indicePrestamo = data.prestamos.findIndex(
-    (p) =>
-      p.cliente.dni === dniCliente &&
-      p.libros.some((l) => l.titulo === tituloLibro)
+    (p) => p.cliente.dni === dniCliente && p.libros.includes(tituloLibro)
   );
 
-  //<=
-  // const indexPrestamo = buscarPrestamo(dniCliente, tituloLibro, data.prestamos);
-  const libroPrestado = data.prestamos[indicePrestamo].libros[0];
-  //if(indexPrestamo === -1)
   if (indicePrestamo === -1) {
     console.log(
       chalk.red("No se encontró un préstamo para este cliente con ese libro.")
     );
     return;
   }
-
-  try {
-    libroPrestado.modificarStock(1); // se agrega del stock del libro
-  } catch (err) {
-    console.log(chalk.red("Error: ", err.message));
+  const libroReal = data.libros.find(
+    (l) => l.titulo.toLowerCase() === tituloLibro.toLowerCase()
+  );
+  if (!libroReal) {
+    console.log(chalk.red("No se encontró el libro en la base de datos."));
     return;
   }
-  //data.prestamos.splice(indexPrestamo, 1);
+  libroReal.stock++;
+
   data.prestamos.splice(indicePrestamo, 1);
   guardar(data);
   console.log(
@@ -197,3 +179,4 @@ function eliminarLibro() {
 //listarLibros();
 //consultarPorNombre();
 crearPrestamo();
+//devolverLibro();

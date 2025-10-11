@@ -1,6 +1,6 @@
 //logica del crud
 import { Libro } from "../model/libros.models.js"
-import { getLibrobyID } from "../utils/utils.libros.js"
+import { getLibrobyID, createID } from "../utils/utils.libros.js"
 import {
 	validarTitulo,
 	validarAutor,
@@ -19,6 +19,7 @@ import path from "path"
 import PromptSync from "prompt-sync"
 import { leerDatos, guardar } from "../db/fileManager.js"
 import chalk from "chalk"
+import { create } from "domain"
 const prompt = PromptSync()
 
 // funcion para leer el archivo. Devuelve todo el objeto del archivo data.json
@@ -55,19 +56,15 @@ function devolverLibro() {
 //admin
 
 function listarLibrosAdmin() {
-	console.log(chalk.green("==============="))
-
 	const data = leerDatos()
 	console.table(data.libros)
 	return true
 }
 
 function agregarLibro() {
-	console.log(chalk.green("==============="))
-
 	const data = leerDatos()
 	// se llaman los validadores sin parentesis para referirse a como mueven los datos y no lo que retornan
-	let id = Date.now(),
+	let id = createID(),
 		titulo = validar("titulo", validarTitulo),
 		autor = validar("autor", validarAutor),
 		genero = validar("genero", validarGenero),
@@ -84,8 +81,6 @@ function agregarLibro() {
 }
 
 function modificarLibro() {
-	console.log(chalk.green("==============="))
-
 	console.log(chalk.greenBright("Ingrese ID del libro a modificar"))
 
 	const data = leerDatos()
@@ -114,8 +109,6 @@ function modificarLibro() {
 }
 
 function eliminarLibro() {
-	console.log(chalk.green("==============="))
-
 	console.log(chalk.greenBright("Ingrese ID del libro a eliminar"))
 	const data = leerDatos()
 

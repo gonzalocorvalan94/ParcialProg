@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
 import { manejarMenuAdmin, mostrarMenuAdmin } from './menuAdmin.js';
 
+
 const prompt = PromptSync();
 
 export function mostrarMenuUsuario() {

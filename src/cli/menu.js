@@ -2,19 +2,26 @@ import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
 import { manejarMenuAdmin } from './menuAdmin.js';
 import { manejarMenuUsuario, mostrarMenuUsuario } from './menuUsuario.js';
-import { esOpcionValidaUsuario } from '../validators/validators.libros.js';
+import { esOpcionValidaUsuario, validar, validarDNI } from '../validators/validators.libros.js';
 import { PASSWORD } from '../utils/constantes.js';
 import {ingreso} from './ingreso.js'
+import { menuActivo } from '../utils/constantes.js';
 const prompt = PromptSync();
 
-let activo = true;
+menuActivo.activo = true;
 
 export function menu() {
-  while (activo) {
+  while (menuActivo.activo) {
 
-    let DNIingresado = prompt(`Ingrese su documento`)
-
+    let DNIingresado = prompt(chalk.blue(`Bienvenido: Ingrese su documento: `))
+    while(!validarDNI(DNIingresado)){
+      DNIingresado = prompt(chalk.red("Intente nuevamente: "))
+    }
     ingreso(DNIingresado)
+
+    if(!ingreso(DNIingresado)){
+      menuActivo.activo = false
+    }
     
     mostrarMenuUsuario();
 
@@ -33,11 +40,11 @@ export function menu() {
     }
 
     if (opcion === PASSWORD) {
-      activo = manejarMenuAdmin();
+      menuActivo.activo = manejarMenuAdmin();
     } else {
-      activo = manejarMenuUsuario(opcion);
+      menuActivo.activo = manejarMenuUsuario(opcion);
     }
   }
 }
 
-menu();
+menu()

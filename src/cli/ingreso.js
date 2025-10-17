@@ -1,4 +1,3 @@
-// ingreso.js
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
 import { leerDatos } from '../db/fileManager.js';

@@ -3,7 +3,7 @@
 import chalk from 'chalk';
 import { type } from 'os';
 import Promptsync from 'prompt-sync';
-import { PASSWORD } from '../cli/menu.js';
+import { PASSWORD } from '../utils/constantes.js';
 
 export function validarTitulo(titulo) {
   let clean = titulo.trim();
@@ -119,19 +119,7 @@ export function validarStock(stock) {
   return true;
 }
 
-export function validarDNI(DNI) {
-  const clean = DNI.trim();
-  const validos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-  if (clean.length <= 7) return false; 
-  for (let i = 0; i < clean.length; i++) {
-    if (!validos.includes(clean[i])) {
-      return false; 
-    }
-  }
-
-  return true;
-}
 
 export function esOpcionValidaUsuario(opcion) {
 	const validas = ["1", "2", "3", "4", "5", PASSWORD]

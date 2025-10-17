@@ -114,10 +114,25 @@ export function validarStock(stock) {
 	if (!clean || clean <= 0) {
 		console.error(chalk.red("Stock no valido"))
 
-		return false
-	}
-	return true
+    return false;
+  }
+  return true;
 }
+
+export function validarDNI(DNI) {
+  const clean = DNI.trim();
+  const validos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+  if (clean.length <= 7) return false; 
+  for (let i = 0; i < clean.length; i++) {
+    if (!validos.includes(clean[i])) {
+      return false; 
+    }
+  }
+
+  return true;
+}
+
 export function esOpcionValidaUsuario(opcion) {
 	const validas = ["1", "2", "3", "4", "5", PASSWORD]
 	return validas.includes(opcion)

@@ -35,31 +35,31 @@ export function manejarMenuAdmin() {
 
     switch (opcion_admin) {
       case '1':
-        listarLibrosAdmin(); //funcion correspondiente
-        mostrarMenuAdmin(); // mostramos de nuevo solo después de una acción válida
+        listarLibrosAdmin();
+        mostrarMenuAdmin();
         break;
       case '2':
-        agregarLibro(); //funcion correspondiente
+        agregarLibro();
         mostrarMenuAdmin();
         break;
       case '3':
-        modificarLibro(); //funcion correspondiente
+        modificarLibro();
         mostrarMenuAdmin();
         break;
       case '4':
-        eliminarLibro(); //funcion correspondiente
+        eliminarLibro();
         mostrarMenuAdmin();
         break;
       case '5':
         listarPrestamos();
-        mostrarMenuAdmin(); //funcion correspondiente
+        mostrarMenuAdmin();
         break;
       case '6':
-        seguirEnAdmin = false; // volver al menú usuario
+        seguirEnAdmin = false;
         break;
       case '7':
         console.log(chalk.green('Hasta luego!'));
-        return false; // cortar todo el programa
+        return false;
       default:
         console.log(chalk.red('Opción inválida. Intente de nuevo.'));
     }

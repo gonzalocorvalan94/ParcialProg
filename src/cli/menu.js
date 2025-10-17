@@ -3,13 +3,19 @@ import PromptSync from 'prompt-sync';
 import { manejarMenuAdmin } from './menuAdmin.js';
 import { manejarMenuUsuario, mostrarMenuUsuario } from './menuUsuario.js';
 import { esOpcionValidaUsuario } from '../validators/validators.libros.js';
-
+import { PASSWORD } from '../utils/constantes.js';
+import {ingreso} from './ingreso.js'
 const prompt = PromptSync();
-export const PASSWORD = 'admin';
+
 let activo = true;
 
 export function menu() {
   while (activo) {
+
+    let DNIingresado = prompt(`Ingrese su documento`)
+
+    ingreso(DNIingresado)
+    
     mostrarMenuUsuario();
 
     let opcion = prompt(

@@ -11,6 +11,13 @@ export class Libro {
     this.stock = stock;
     this.precio = precio;
   }
+  modificarStock(cantidad) {
+    // en cantidad se espera: 1 (suma), -1(resta)
+    if (this.stock + cantidad < 0) {
+      throw new Error(`No hay suficiente stock de "${this.titulo}"`);
+    }
+    this.stock += cantidad;
+  }
 }
 
 export class Usuario {
@@ -23,11 +30,15 @@ export class Usuario {
 }
 
 export class Prestamo {
-  constructor(cliente, libros, fechaEntrega, fechaDevolucion) {
-    this.cliente = cliente;
-    this.libros = libros;
+  constructor(id, cliente, libros, fechaEntrega, fechaDevolucion) {
+    this.id = id;
+    this.cliente = cliente.nombre;
+    this.libros = libros.map((libro) => libro.titulo);
     this.fechaEntrega = fechaEntrega;
     this.fechaDevolucion = fechaDevolucion;
+    this.total = this.calcularTotal(libros);
+  }
+  calcularTotal(libros) {
+    return libros.reduce((acc, libro) => acc + libro.precio, 0);
   }
 }
-

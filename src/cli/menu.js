@@ -1,35 +1,40 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
 import { manejarMenuAdmin } from './menuAdmin.js';
-import { manejarMenuUsuario, mostrarMenuUsuario } from './menuUsuario.js';
-import { esOpcionValidaUsuario } from '../validators/validators.libros.js';
+import { manejarMenuUsuario } from './menuUsuario.js';
+import { validarDNI } from '../validators/validators.libros.js';
+import { PASSWORD } from '../utils/constantes.js';
+import { ingreso } from './ingreso.js';
+import { menuActivo } from '../utils/constantes.js';
 
 const prompt = PromptSync();
-export const PASSWORD = 'admin';
-let activo = true;
+menuActivo.activo = true;
 
 export function menu() {
-  while (activo) {
-    mostrarMenuUsuario();
+  let DNIingresado = prompt(
+    chalk.blue(`Bienvenido a nuestra libreria. Ingrese su documento: `)
+  );
+  while (!validarDNI(DNIingresado)) {
+    DNIingresado = prompt(chalk.red('Intente nuevamente: '));
+  }
 
+  const usuarioActual = ingreso(DNIingresado);
+  if (!usuarioActual) {
+    console.log(chalk.red('No se pudo iniciar sesión'));
+    return;
+  }
+
+  while (menuActivo.activo) {
     let opcion = prompt(
       chalk.blue(
-        'Ingrese una opción o ingrese la contraseña de administrador: '
+        'Ingrese la contraseña de administrador (o Enter para menú usuario): '
       )
     );
 
-    while (!esOpcionValidaUsuario(opcion)) {
-      opcion = prompt(
-        chalk.red(
-          'Opción inválida. Ingrese una opción o la contraseña de administrador: '
-        )
-      );
-    }
-
     if (opcion === PASSWORD) {
-      activo = manejarMenuAdmin();
+      menuActivo.activo = manejarMenuAdmin();
     } else {
-      activo = manejarMenuUsuario(opcion);
+      menuActivo.activo = manejarMenuUsuario(usuarioActual);
     }
   }
 }

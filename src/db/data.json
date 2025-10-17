@@ -37,10 +37,17 @@
       "dni": "87654321",
       "telefono": "333444",
       "direccion": "Av. Siempreviva 742"
+    },
+    {
+      "nombre": "Gonzalo Corvalan",
+      "dni": "12345678910",
+      "telefono": "12345678910",
+      "direccion": "mitre 123456"
     }
   ],
   "prestamos": [
-    { "id": 1,
+    {
+      "id": 1,
       "cliente": "Juan Pérez",
       "libros": "Cien años de soledad",
       "fechaEntrega": "20/9/2025",

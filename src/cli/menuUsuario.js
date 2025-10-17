@@ -1,39 +1,54 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
-import { manejarMenuAdmin, mostrarMenuAdmin } from './menuAdmin.js';
+import {
+  listarLibros,
+  consultarPorNombre,
+  crearPrestamo,
+  devolverLibro,
+} from '../service/service.libros.js';
 
 const prompt = PromptSync();
 
 export function mostrarMenuUsuario() {
   console.log(
     chalk.blue(`
-  --- Biblioteca ---
-  1. Listar libros
-  2. Consultar libro por nombre
-  3. Solicitar libro
-  4. Devolver libro
-  5. Salir
+--- Biblioteca ---
+1. Listar libros
+2. Consultar libro por nombre
+3. Solicitar libro
+4. Devolver libro
+5. Salir
   `)
   );
 }
 
-export function manejarMenuUsuario(opcion) {
-  switch (opcion) {
-    case '1':
-      console.log('Listar');
-      break;
-    case '2':
-      console.log('Consultar');
-      break;
-    case '3':
-      console.log('Pedir');
-      break;
-    case '4':
-      console.log('Devolver');
-      break;
-    case '5':
-      console.log(chalk.green('Hasta luego!'));
-      return false; //retornamos falso para que corte el bucle. No hace falta el break, el return mata todo
+export function manejarMenuUsuario(usuario) {
+  let seguirEnUsuario = true;
+
+  while (seguirEnUsuario) {
+    mostrarMenuUsuario();
+    const opcion = prompt(chalk.blue('Ingrese una opción: '));
+
+    switch (opcion) {
+      case '1':
+        listarLibros();
+        break;
+      case '2':
+        consultarPorNombre();
+        break;
+      case '3':
+        crearPrestamo(usuario);
+        break;
+      case '4':
+        devolverLibro(usuario);
+        break;
+      case '5':
+        console.log(chalk.green('Hasta luego!'));
+        seguirEnUsuario = false;
+        return false;
+      default:
+        console.log(chalk.red('Opción inválida, intente nuevamente.'));
+    }
   }
 
   return true;

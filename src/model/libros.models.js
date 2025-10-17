@@ -1,7 +1,3 @@
-
-//clase que maneja el objeto del libro
-//clase que maneja el objeto del usuario
-//clase que maneja el objeto de los prestamos
 export class Libro {
   constructor(id, titulo, autor, genero, stock, precio) {
     this.id = id;
@@ -10,6 +6,12 @@ export class Libro {
     this.genero = genero;
     this.stock = stock;
     this.precio = precio;
+  }
+  modificarStock(cantidad) {
+    if (this.stock + cantidad < 0) {
+      throw new Error(`No hay suficiente stock de "${this.titulo}"`);
+    }
+    this.stock += cantidad;
   }
 }
 
@@ -23,11 +25,16 @@ export class Usuario {
 }
 
 export class Prestamo {
-  constructor(cliente, libros, fechaEntrega, fechaDevolucion) {
-    this.cliente = cliente;
-    this.libros = libros;
+  constructor(id, cliente, libros, fechaEntrega, fechaDevolucion) {
+    this.id = id;
+    this.cliente = cliente.nombre;
+    this.libros = libros.length > 0 ? libros[0].titulo : '';
     this.fechaEntrega = fechaEntrega;
     this.fechaDevolucion = fechaDevolucion;
+    this.total = this.calcularTotal(libros);
+  }
+  calcularTotal(libros) {
+    return libros.reduce((acc, libro) => acc + libro.precio, 0);
   }
 }
 

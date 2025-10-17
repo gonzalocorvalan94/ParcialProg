@@ -1,5 +1,13 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
+import {
+  agregarLibro,
+  eliminarLibro,
+  listarLibrosAdmin,
+  listarPrestamos,
+  modificarLibro,
+} from '../service/service.libros.js';
+
 const prompt = PromptSync();
 
 export function mostrarMenuAdmin() {
@@ -10,12 +18,12 @@ export function mostrarMenuAdmin() {
   2. Agregar libro
   3. Modificar libro
   4. Eliminar libro
-  5. Volver al menu anterior
-  6. Salir
+  5. Listar Prestamos
+  6. Volver al menu anterior
+  7. Salir
   `)
   );
 }
-
 
 export function manejarMenuAdmin() {
   let seguirEnAdmin = true;
@@ -27,30 +35,33 @@ export function manejarMenuAdmin() {
 
     switch (opcion_admin) {
       case '1':
-        console.log('Listado de libros...'); //funcion correspondiente
-        mostrarMenuAdmin(); // mostramos de nuevo solo después de una acción válida
+        listarLibrosAdmin();
+        mostrarMenuAdmin();
         break;
       case '2':
-        console.log('Agregar libro...'); //funcion correspondiente
+        agregarLibro();
         mostrarMenuAdmin();
         break;
       case '3':
-        console.log('Modificar libro...'); //funcion correspondiente
+        modificarLibro();
         mostrarMenuAdmin();
         break;
       case '4':
-        console.log('Eliminar libro...'); //funcion correspondiente
+        eliminarLibro();
         mostrarMenuAdmin();
         break;
       case '5':
-        seguirEnAdmin = false; // volver al menú usuario
+        listarPrestamos();
+        mostrarMenuAdmin();
         break;
       case '6':
+        seguirEnAdmin = false;
+        break;
+      case '7':
         console.log(chalk.green('Hasta luego!'));
-        return false; // cortar todo el programa
+        return false;
       default:
         console.log(chalk.red('Opción inválida. Intente de nuevo.'));
-        
     }
   }
   return true;

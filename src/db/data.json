@@ -13,7 +13,7 @@
       "titulo": "El principito",
       "autor": "Antoine de Saint-Exupéry",
       "genero": "Infantil",
-      "stock": 6,
+      "stock": 4,
       "precio": 800
     },
     {
@@ -21,7 +21,7 @@
       "titulo": "1984",
       "autor": "George Orwell",
       "genero": "Ciencia Ficción",
-      "stock": 3,
+      "stock": 2,
       "precio": 1000
     }
   ],
@@ -40,7 +40,8 @@
     }
   ],
   "prestamos": [
-    { "id": 1,
+    {
+      "id": 1,
       "cliente": "Juan Pérez",
       "libros": "Cien años de soledad",
       "fechaEntrega": "20/9/2025",
@@ -53,6 +54,36 @@
       "libros": "El principito",
       "fechaEntrega": "22/9/2025",
       "fechaDevolucion": "5/10/2025",
+      "total": 800
+    },
+    {
+      "id": 3,
+      "cliente": "Juan Pérez",
+      "libros": [
+        "El principito"
+      ],
+      "fechaEntrega": "05/10/2025",
+      "fechaDevolucion": "05/11/2025",
+      "total": 800
+    },
+    {
+      "id": 4,
+      "cliente": "Juan Pérez",
+      "libros": [
+        "1984"
+      ],
+      "fechaEntrega": "22/10/2025",
+      "fechaDevolucion": "05/11/2025",
+      "total": 1000
+    },
+    {
+      "id": 5,
+      "cliente": "Juan Pérez",
+      "libros": [
+        "El principito"
+      ],
+      "fechaEntrega": "05/10/2025",
+      "fechaDevolucion": "05/11/2025",
       "total": 800
     }
   ]

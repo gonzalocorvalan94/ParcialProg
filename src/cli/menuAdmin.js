@@ -1,9 +1,9 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
+import { listarPrestamos } from '../service/service.prestamos.js';
 import {
   agregarLibro,
   eliminarLibro,
-  listarPrestamos,
   listarLibros,
   modificarLibro,
 } from '../service/service.libros.js';
@@ -28,7 +28,7 @@ export function mostrarMenuAdmin() {
 export function manejarMenuAdmin() {
   let seguirEnAdmin = true;
 
-  mostrarMenuAdmin(); // se muestra una vez al entrar
+  mostrarMenuAdmin(); 
 
   while (seguirEnAdmin) {
     let opcion_admin = prompt(chalk.blue('Ingrese una opción: '));

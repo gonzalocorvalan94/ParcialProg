@@ -37,18 +37,6 @@
       "dni": "87654321",
       "telefono": "333444",
       "direccion": "Av. Siempreviva 742"
-    },
-    {
-      "nombre": "Gonzalo Corvalan",
-      "dni": "12345678910",
-      "telefono": "12345678910",
-      "direccion": "mitre 123456"
-    },
-    {
-      "nombre": "Gonzalo",
-      "dni": "38426616",
-      "telefono": "2281462103",
-      "direccion": "Mitre 145"
     }
   ],
   "prestamos": [

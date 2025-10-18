@@ -47,11 +47,16 @@ export function registrarCliente() {
   const data = leerDatos();
 
   const nombre = validar('nombre del usuario', validarNombre);
-  const dni = validar('DNI del usuario', validarDNI);
 
-  if (data.clientes.some((c) => c.dni === dni)) {
-    console.log(chalk.red('Ya existe un cliente con ese DNI.'));
-    return;
+  let dni;
+  while (true) {
+    dni = validar('DNI del usuario', validarDNI);
+
+    if (data.clientes.some(c => c.dni === dni)) {
+      console.log(chalk.red('Ya existe un cliente con ese DNI. Intente otro.'));
+    } else {
+      break; 
+    }
   }
 
   const telefono = validar('teléfono del usuario', validarNumero);
@@ -71,6 +76,7 @@ export function registrarCliente() {
 
   console.log(chalk.green('Se creó el cliente correctamente'));
 }
+
 
 export function modificarCliente() {
   const data = leerDatos();

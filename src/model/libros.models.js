@@ -21,10 +21,10 @@ export class Usuario {
 export class Prestamo {
   constructor(id, cliente, libro, fechaEntrega, fechaDevolucion) {
     this.id = id;
-    this.cliente = cliente.nombre; // Solo el nombre
-    this.libros = libro.titulo;    // Solo el título como string
+    this.cliente = cliente.nombre; 
+    this.libros = libro.titulo;    
     this.fechaEntrega = fechaEntrega;
     this.fechaDevolucion = fechaDevolucion;
-    this.total = libro.precio;     // Precio del libro
+    this.total = libro.precio;     
   }
 }

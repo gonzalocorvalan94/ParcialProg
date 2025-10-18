@@ -20,8 +20,7 @@ export function menu() {
 
   const usuarioActual = ingreso(DNIingresado);
   if (!usuarioActual) {
-    console.log(chalk.red('No se pudo iniciar sesión'));
-    return;
+    return menu();
   }
 
   while (menuActivo.activo) {

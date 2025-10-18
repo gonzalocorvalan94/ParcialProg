@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
 import { leerDatos } from '../db/fileManager.js';
-import { registrarCliente } from '../service/service.libros.js';
+import { registrarCliente } from '../service/service.clientes.js';
 
 const prompt = PromptSync();
 
@@ -13,7 +13,6 @@ export function ingreso(DNIingresado) {
     console.log(chalk.blue('Usted no se encuentra registrado. Vamos a hacerlo'));
     const resultado = registrarCliente();
 
-    // Si el usuario canceló el registro, devolvemos null
     if (resultado === false) {
       console.log(chalk.yellow('Operación cancelada. Volviendo al inicio...'));
       return null;

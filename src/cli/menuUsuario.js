@@ -1,11 +1,7 @@
 import chalk from 'chalk';
 import PromptSync from 'prompt-sync';
-import {
-  listarLibros,
-  consultarPorNombre,
-  crearPrestamo,
-  devolverLibro,
-} from '../service/service.libros.js';
+import { crearPrestamo, devolverLibro } from '../service/service.prestamos.js';
+import { listarLibros, consultarPorNombre } from '../service/service.libros.js';
 
 const prompt = PromptSync();
 

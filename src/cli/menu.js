@@ -14,6 +14,7 @@ export function menu() {
   let DNIingresado = prompt(
     chalk.blue(`Bienvenido a nuestra libreria. Ingrese su documento: `)
   );
+
   while (!validarDNI(DNIingresado)) {
     DNIingresado = prompt(chalk.red('Intente nuevamente: '));
   }
@@ -38,4 +39,3 @@ export function menu() {
   }
 }
 
-menu();

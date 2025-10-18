@@ -43,6 +43,12 @@
       "dni": "12345678910",
       "telefono": "12345678910",
       "direccion": "mitre 123456"
+    },
+    {
+      "nombre": "38426616",
+      "dni": "38426616",
+      "telefono": "2281462103",
+      "direccion": "Mitre 145"
     }
   ],
   "prestamos": [

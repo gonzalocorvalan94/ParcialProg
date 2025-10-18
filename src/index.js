@@ -1,1 +1,3 @@
-//Aca se llama al menu, nada mas
+import { menu } from "./cli/menu.js";
+
+menu();

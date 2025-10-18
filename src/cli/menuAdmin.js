@@ -4,6 +4,7 @@ import {
   agregarLibro,
   eliminarLibro,
   listarPrestamos,
+  listarLibros,
   modificarLibro
 } from '../service/service.libros.js';
 

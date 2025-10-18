@@ -91,17 +91,7 @@ export function validarFecha(fecha) {
     console.error(chalk.red("Fecha no válida. Formato esperado: DD/MM/AAAA"));
     return false;
   }
-  // opcional: verificar si realmente es una fecha existente
-  const [dia, mes, anio] = fecha.split("/").map(Number);
-  const date = new Date(anio, mes - 1, dia);
-  if (
-    date.getFullYear() !== anio ||
-    date.getMonth() !== mes - 1 ||
-    date.getDate() !== dia
-  ) {
-    console.error(chalk.red("Fecha no válida"));
-    return false;
-  }
+
   return true;
 }
 
@@ -144,4 +134,13 @@ export function validar(datoValidar, validador) {
 		input = prompt("Ingrese " + datoValidar + ": ")
 	}
 	return input
+}
+
+export function validarID(id) {
+  const num = Number(id);
+  if (!num || num <= 0) {
+    console.error(chalk.red("ID no válido"));
+    return false;
+  }
+  return true;
 }

@@ -75,12 +75,38 @@ export function validarNumero(telefono) {
   return true;
 }
 export function validarDireccion(direccion) {
-  let clean = direccion.trim();
-  if (!clean || clean.length < 3) {
-    console.error(chalk.red('Direccion no valida'));
-
+  if (typeof direccion !== 'string') {
+    console.error(chalk.red('La dirección debe ser un texto'));
     return false;
   }
+
+  const clean = direccion.trim();
+
+  // Mínimo 5 caracteres
+  if (clean.length < 5) {
+    console.error(chalk.red('La dirección es demasiado corta'));
+    return false;
+  }
+
+  // Solo se permiten letras, números, espacios y algunos signos comunes
+  const regexCaracteresValidos = /^[a-zA-ZÀ-ÿ0-9\s.,°-]+$/;
+  if (!regexCaracteresValidos.test(clean)) {
+    console.error(chalk.red('La dirección contiene caracteres inválidos'));
+    return false;
+  }
+
+  // Debe tener al menos una letra y un número
+  const tieneLetra = /[a-zA-ZÀ-ÿ]/.test(clean);
+  const tieneNumero = /\d/.test(clean);
+  if (!tieneLetra || !tieneNumero) {
+    console.error(
+      chalk.red(
+        'La dirección debe incluir letras y números (ej: "Av. Rivadavia 1234")'
+      )
+    );
+    return false;
+  }
+
   return true;
 }
 
@@ -98,9 +124,13 @@ export function validarDNI(DNI) {
   const clean = DNI.trim();
   const validos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-  if (clean.length <= 7) return false;
+  if (clean.length <= 7) {
+    console.error(chalk.red('DNI inválido'));
+    return false;
+  }
   for (let i = 0; i < clean.length; i++) {
     if (!validos.includes(clean[i])) {
+      console.error(chalk.red('DNI inválido'));
       return false;
     }
   }

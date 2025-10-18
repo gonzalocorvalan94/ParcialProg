@@ -2,8 +2,10 @@
 // el validador retornara true o false
 import chalk from 'chalk';
 import { type } from 'os';
-import Promptsync from 'prompt-sync';
+import PromptSync from 'prompt-sync';
 import { PASSWORD } from '../utils/constantes.js';
+
+const prompt = PromptSync();
 
 export function validarTitulo(titulo) {
   let clean = titulo.trim();
@@ -83,6 +85,26 @@ export function validarDireccion(direccion) {
   return true;
 }
 
+export function validarFecha(fecha) {
+  const regex = /^\d{2}\/\d{2}\/\d{4}$/; // DD/MM/AAAA
+  if (!regex.test(fecha)) {
+    console.error(chalk.red("Fecha no válida. Formato esperado: DD/MM/AAAA"));
+    return false;
+  }
+  // opcional: verificar si realmente es una fecha existente
+  const [dia, mes, anio] = fecha.split("/").map(Number);
+  const date = new Date(anio, mes - 1, dia);
+  if (
+    date.getFullYear() !== anio ||
+    date.getMonth() !== mes - 1 ||
+    date.getDate() !== dia
+  ) {
+    console.error(chalk.red("Fecha no válida"));
+    return false;
+  }
+  return true;
+}
+
 export function validarDNI(DNI) {
   const clean = DNI.trim();
   const validos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -97,10 +119,6 @@ export function validarDNI(DNI) {
   return true;
 }
 
-export function esOpcionValidaUsuario(opcion) {
-  const validas = ['1', '2', '3', '4', '5', PASSWORD];
-  return validas.includes(opcion);
-}
 export function validarPrecio(precio) {
 	let clean = Number(precio)
 	if (!clean || clean <= 0) {
@@ -117,13 +135,6 @@ export function validarStock(stock) {
     return false;
   }
   return true;
-}
-
-
-
-export function esOpcionValidaUsuario(opcion) {
-	const validas = ["1", "2", "3", "4", "5", PASSWORD]
-	return validas.includes(opcion)
 }
 
 

@@ -13,7 +13,7 @@
       "titulo": "El principito",
       "autor": "Antoine de Saint-Exupéry",
       "genero": "Infantil",
-      "stock": 6,
+      "stock": 2,
       "precio": 800
     },
     {
@@ -43,6 +43,12 @@
       "dni": "12345678910",
       "telefono": "12345678910",
       "direccion": "mitre 123456"
+    },
+    {
+      "nombre": "Gonzalo",
+      "dni": "38426616",
+      "telefono": "2281462103",
+      "direccion": "Mitre 145"
     }
   ],
   "prestamos": [

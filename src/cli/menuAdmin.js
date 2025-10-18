@@ -3,9 +3,8 @@ import PromptSync from 'prompt-sync';
 import {
   agregarLibro,
   eliminarLibro,
-  listarLibrosAdmin,
   listarPrestamos,
-  modificarLibro,
+  modificarLibro
 } from '../service/service.libros.js';
 
 const prompt = PromptSync();
@@ -35,7 +34,7 @@ export function manejarMenuAdmin() {
 
     switch (opcion_admin) {
       case '1':
-        listarLibrosAdmin();
+        listarLibros();
         mostrarMenuAdmin();
         break;
       case '2':

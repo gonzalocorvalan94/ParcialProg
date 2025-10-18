@@ -1,30 +1,26 @@
-//logica del crud
-import { Libro, Usuario } from '../model/libros.models.js';
+// service.libros.js
+import chalk from 'chalk';
+import PromptSync from 'prompt-sync';
+import { leerDatos, guardar } from '../db/fileManager.js';
+import { Libro, Usuario, Prestamo } from '../model/libros.models.js';
 import {
   validarTitulo,
   validarAutor,
   validarGenero,
-  validarEmail,
   validarNombre,
   validarNumero,
+  validarFecha,
   validarDireccion,
   validarDNI,
-  validar,
+  validar
 } from '../validators/validators.libros.js';
 
-import fs from 'fs';
-import path from 'path';
-// funcion para leer el archivo. Devuelve todo el objeto del archivo data.json
-import PromptSync from 'prompt-sync';
-import { leerDatos, guardar } from '../db/fileManager.js';
 const prompt = PromptSync();
-import chalk from 'chalk';
 
-//Registro de usuario
+// ---------------- CLIENTES ----------------
 
-function listarUsuarios() {
-  let data = leerDatos();
-
+export function listarUsuarios() {
+  const data = leerDatos();
   const clientes = data.clientes;
 
   if (!clientes || clientes.length === 0) {
@@ -32,13 +28,9 @@ function listarUsuarios() {
     return;
   }
 
-  clientes.forEach((usuarios, index) => {
+  clientes.forEach((usuario, index) => {
     console.log(
-      chalk.blue(`
-      ${index + 1}. ${clientes.nombre} - DNI: ${clientes.dni} - Tel: ${
-        clientes.telefono
-      } - Dirección: ${clientes.direccion}
-      `)
+      chalk.blue(`${index + 1}. ${usuario.nombre} - DNI: ${usuario.dni} - Tel: ${usuario.telefono} - Dirección: ${usuario.direccion}`)
     );
   });
 }
@@ -47,37 +39,33 @@ export function registrarCliente() {
   const data = leerDatos();
 
   const nombre = validar("nombre del usuario", validarNombre);
-  const DNI = validar("DNI del usuario", validarDNI);
+  const dni = validar("DNI del usuario", validarDNI);
 
-  
-  if (data.clientes.some(cliente => cliente.DNI === DNI)) {
+  if (data.clientes.some(c => c.dni === dni)) {
     console.log(chalk.red("Ya existe un cliente con ese DNI."));
     return;
   }
 
-  const tel = validar("teléfono del usuario", validarNumero);
+  const telefono = validar("teléfono del usuario", validarNumero);
   const direccion = validar("dirección del usuario", validarDireccion);
 
   const confirmacion = prompt(chalk.red("¿Está seguro que desea registrar el usuario? (s/n): "));
   if (confirmacion.toLowerCase() !== 's') {
     console.log(chalk.blue("Operación cancelada"));
-    return;
+    return false;
   }
 
-  const nuevoCliente = new Usuario(nombre, DNI, tel, direccion);
+  const nuevoCliente = new Usuario(nombre, dni, telefono, direccion);
   data.clientes.push(nuevoCliente);
   guardar(data);
 
   console.log(chalk.green("Se creó el cliente correctamente"));
 }
 
-
 export function modificarCliente() {
   const data = leerDatos();
-
-  const usuarioDNI = prompt(chalk.blue("Ingrese el DNI del usuario que desea modificar: "));
-
-  const index = data.clientes.findIndex(usuario => usuario.DNI === usuarioDNI);
+  const dni = prompt(chalk.blue("Ingrese el DNI del usuario que desea modificar: "));
+  const index = data.clientes.findIndex(c => c.dni === dni);
 
   if (index === -1) {
     console.log(chalk.red("Usuario no encontrado"));
@@ -85,8 +73,8 @@ export function modificarCliente() {
   }
 
   const nombre = validar("nombre del usuario", validarNombre);
-  const DNI = validar("DNI del usuario", validarDNI);
-  const tel = validar("teléfono del usuario", validarNumero);
+  const nuevoDNI = validar("DNI del usuario", validarDNI);
+  const telefono = validar("teléfono del usuario", validarNumero);
   const direccion = validar("dirección del usuario", validarDireccion);
 
   const confirmacion = prompt(chalk.red("¿Está seguro que desea modificar el usuario? (s/n): "));
@@ -95,21 +83,17 @@ export function modificarCliente() {
     return;
   }
 
-  const usuarioModificado = new Usuario(nombre, DNI, tel, direccion);
+  const usuarioModificado = new Usuario(nombre, nuevoDNI, telefono, direccion);
   data.clientes[index] = usuarioModificado;
-
   guardar(data);
 
   console.log(chalk.green("Usuario modificado correctamente"));
 }
 
-
 export function eliminarCliente() {
   const data = leerDatos();
-
-  const usuarioDNI = validar("DNI del usuario", validarDNI);
-
-  const index = data.clientes.findIndex(usuario => usuario.DNI === usuarioDNI);
+  const dni = validar("DNI del usuario", validarDNI);
+  const index = data.clientes.findIndex(c => c.dni === dni);
 
   if (index === -1) {
     console.log(chalk.red("Usuario no encontrado"));
@@ -124,41 +108,171 @@ export function eliminarCliente() {
 
   data.clientes.splice(index, 1);
   guardar(data);
-
   console.log(chalk.green("Usuario eliminado correctamente"));
 }
 
+// ---------------- LIBROS ----------------
 
-//prestamo de usuario
+export function listarLibros() {
+  const data = leerDatos();
 
-function listarLibros() {
-  //esto es un get
+  if (!data.libros || data.libros.length === 0) {
+    console.log(chalk.red("No hay libros registrados."));
+    return;
+  }
+
+  console.table(data.libros);
 }
 
-function consultarPorNombre() {
-  //esto es un get por nombre
+export function consultarPorNombre() {
+  const data = leerDatos();
+  const busqueda = prompt("Ingrese el título o parte del título del libro: ").toLowerCase();
+  const resultados = data.libros.filter(l => l.titulo.toLowerCase().includes(busqueda));
+
+  if (resultados.length === 0) {
+    console.log(chalk.red("No se encontraron libros con ese nombre."));
+    return;
+  }
+
+  console.table(resultados);
 }
 
-function crearPrestamo() {
-  //post por nombre y datos de usuario
+export function agregarLibro() {
+  const data = leerDatos();
+
+  const id = data.libros.length ? data.libros[data.libros.length - 1].id + 1 : 1;
+  const titulo = validar("titulo", validarTitulo);
+  const autor = validar("autor", validarAutor);
+  const genero = validar("genero", validarGenero);
+  const stock = Number(validar("stock", validarNumero));
+  const precio = Number(validar("precio", validarNumero));
+
+  const nuevoLibro = new Libro(id, titulo, autor, genero, stock, precio);
+  data.libros.push(nuevoLibro);
+  guardar(data);
+
+  console.log(chalk.green("Libro agregado correctamente"));
 }
 
-function devolverLibro() {
-  //delete dni de usuario y nombre del libro
+export function modificarLibro() {
+  const data = leerDatos();
+  const id = Number(validar("ID del libro", validarNumero));
+  const index = data.libros.findIndex(l => l.id === id);
+
+  if (index === -1) {
+    console.log(chalk.red("Libro no encontrado"));
+    return;
+  }
+
+  const titulo = validar("titulo", validarTitulo);
+  const autor = validar("autor", validarAutor);
+  const genero = validar("genero", validarGenero);
+  const stock = Number(validar("stock", validarNumero));
+  const precio = Number(validar("precio", validarNumero));
+
+  const libroModificado = new Libro(id, titulo, autor, genero, stock, precio);
+  data.libros.splice(index, 1, libroModificado);
+  guardar(data);
+
+  console.log(chalk.green("Libro modificado correctamente"));
 }
 
-//admin
+export function eliminarLibro() {
+  const data = leerDatos();
+  const id = Number(validar("ID del libro", validarNumero));
+  const index = data.libros.findIndex(l => l.id === id);
 
-function listarLibrosAdmin() {}
+  if (index === -1) {
+    console.log(chalk.red("Libro no encontrado"));
+    return;
+  }
 
-function agregarLibro() {
-  //post
+  data.libros.splice(index, 1);
+  guardar(data);
+  console.log(chalk.green("Libro eliminado correctamente"));
 }
 
-function modificarLibro() {
-  //put por id
+// ---------------- PRÉSTAMOS ----------------
+
+export function crearPrestamo(usuario) {
+  const data = leerDatos();
+  const cliente = data.clientes.find(c => c.dni === usuario.dni);
+
+  if (!cliente) {
+    console.log(chalk.red("Cliente no encontrado."));
+    return;
+  }
+
+  const tituloLibro = validar("Ingrese el título del libro que desea: ", validarTitulo);
+  const libro = data.libros.find(l => l.titulo.toLowerCase() === tituloLibro.toLowerCase());
+
+  if (!libro) {
+    console.log(chalk.red("Libro no encontrado"));
+    return;
+  }
+
+  if (libro.stock <= 0) {
+    console.log(chalk.red("No hay stock disponible para este libro."));
+    return;
+  }
+
+  libro.stock--; // Reducir stock
+
+  const fechaEntrega = validar("Ingrese la fecha de entrega (DD/MM/AAAA): ", validarFecha);
+  const fechaDevolucion = validar("Ingrese la fecha de devolución (DD/MM/AAAA): ", validarFecha);
+
+  const nuevoPrestamo = new Prestamo(
+    data.prestamos.length ? data.prestamos[data.prestamos.length - 1].id + 1 : 1,
+    cliente,
+    libro, // pasamos solo un libro
+    fechaEntrega,
+    fechaDevolucion
+  );
+
+  data.prestamos.push(nuevoPrestamo);
+  guardar(data);
+
+  console.log(chalk.green(`Prestamo creado correctamente para ${cliente.nombre}`));
 }
 
-function eliminarLibro() {
-  //delete por id
+
+export function devolverLibro(usuario) {
+  const data = leerDatos();
+  const cliente = data.clientes.find(c => c.dni === usuario.dni);
+
+  if (!cliente) {
+    console.log(chalk.red("Cliente no encontrado."));
+    return;
+  }
+
+  const tituloLibro = validar("Ingrese título del libro a devolver: ", validarTitulo);
+  const indicePrestamo = data.prestamos.findIndex(
+    p => p.cliente === cliente.nombre && p.libros === tituloLibro
+  );
+
+  if (indicePrestamo === -1) {
+    console.log(chalk.red("No se encontró un préstamo para este cliente con ese libro."));
+    return;
+  }
+
+  const libroReal = data.libros.find(l => l.titulo.toLowerCase() === tituloLibro.toLowerCase());
+  if (!libroReal) {
+    console.log(chalk.red("No se encontró el libro en la base de datos."));
+    return;
+  }
+
+  libroReal.stock++;
+  data.prestamos.splice(indicePrestamo, 1);
+  guardar(data);
+
+  console.log(chalk.green(`Libro "${tituloLibro}" devuelto correctamente.`));
+}
+
+export function listarPrestamos() {
+  const data = leerDatos();
+  if (!data.prestamos || data.prestamos.length === 0) {
+    console.log(chalk.red("No hay préstamos registrados."));
+    return;
+  }
+  console.table(data.prestamos);
 }

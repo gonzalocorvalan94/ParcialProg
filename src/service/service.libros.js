@@ -158,21 +158,21 @@ export function consultarPorNombre() {
 }
 
 export function agregarLibro() {
-	const data = leerDatos()
-	let id = createID(),
-		titulo = validar("titulo", validarTitulo),
-		autor = validar("autor", validarAutor),
-		genero = validar("genero", validarGenero),
-		stock = Number(validar("stock", validarStock)),
-		precio = Number(validar("precio", validarPrecio))
-	const nuevoLibro = new Libro(id, titulo, autor, genero, stock, precio)
+  const data = leerDatos();
+  let id = createID(),
+    titulo = validar('titulo', validarTitulo),
+    autor = validar('autor', validarAutor),
+    genero = validar('genero', validarGenero),
+    stock = Number(validar('stock', validarStock)),
+    precio = Number(validar('precio', validarPrecio));
+  const nuevoLibro = new Libro(id, titulo, autor, genero, stock, precio);
 
-	data.libros.push(nuevoLibro)
-	guardar(data)
-	console.table(data.libros)
+  data.libros.push(nuevoLibro);
+  guardar(data);
+  console.table(data.libros);
 
-	console.log(chalk.green("¡Usuario creado correctamente!"))
-	return true
+  console.log(chalk.green('¡Usuario creado correctamente!'));
+  return true;
 }
 
 export function modificarLibro() {

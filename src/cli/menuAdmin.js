@@ -5,7 +5,7 @@ import {
   eliminarLibro,
   listarPrestamos,
   listarLibros,
-  modificarLibro
+  modificarLibro,
 } from '../service/service.libros.js';
 
 const prompt = PromptSync();

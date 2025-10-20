@@ -3,7 +3,7 @@
 import chalk from "chalk";
 import { type } from "os";
 import PromptSync from "prompt-sync";
-import { PASSWORD } from "../cli/menu.js";
+import { PASSWORD } from "../utils/constantes.js";
 const prompt = PromptSync();
 
 export function validarTitulo(titulo) {
@@ -66,11 +66,12 @@ export function validarEmail(email) {
 }
 // console.log(validarEmail("gaspar@gmail.com")) devuelve true
 export function validarNumero(telefono) {
-  if (!telefono || typeof telefono != "number" || telefono.length < 9) {
-    console.error(chalk.red("Telefono no valido"));
-    return false;
-  }
-  return true;
+	let clean = telefono.trim()
+	if (!clean || clean <= 0) {
+		console.error(chalk.red("Telefono no valido"))
+		return false
+	}
+	return true
 }
 export function validarDireccion(direccion) {
   let clean = direccion.trim();
@@ -119,7 +120,27 @@ export function validarFecha(fecha) {
 export function esOpcionValidaUsuario(opcion) {
   const validas = ["1", "2", "3", "4", "5", PASSWORD];
   return validas.includes(opcion);
+export function validarPrecio(precio) {
+	let clean = Number(precio)
+	if (!clean || clean <= 0) {
+		console.error(chalk.red("Precio no valido"))
+		return false
+	}
+	return true
 }
+export function validarStock(stock) {
+	let clean = Number(stock)
+	if (!clean || clean <= 0) {
+		console.error(chalk.red("Stock no valido"))
+
+		return false
+	}
+	return true
+}
+export function validarID(id) {
+	let clean = Number(id)
+	if (!clean || clean <= 0) {
+		console.error(chalk.red("ID no valida"))
 
 export function validar(datoValidar, validador) {
   let input = prompt("Ingrese " + datoValidar + ": ");

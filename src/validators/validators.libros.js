@@ -1,9 +1,6 @@
-// validadores
-// el validador retornara true o false
 import chalk from 'chalk';
-import { type } from 'os';
+
 import PromptSync from 'prompt-sync';
-import { PASSWORD } from '../utils/constantes.js';
 
 const prompt = PromptSync();
 
@@ -109,7 +106,6 @@ export function validarDireccion(direccion) {
 
   return true;
 }
-
 
 export function validarFecha(fecha) {
   const regex = /^\d{2}\/\d{2}\/\d{4}$/; // DD/MM/AAAA

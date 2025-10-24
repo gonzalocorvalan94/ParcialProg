@@ -37,7 +37,6 @@ export function registrarCliente(dniExistente) {
 
   const nombre = validar('nombre del usuario', validarNombre);
 
-  
   const dni = dniExistente;
 
   const telefono = validar('teléfono del usuario', validarNumero);
@@ -57,9 +56,8 @@ export function registrarCliente(dniExistente) {
   guardar(data);
 
   console.log(chalk.green('Se creó el cliente correctamente'));
-  return nuevoCliente; // devolvés el objeto para usarlo directamente
+  return nuevoCliente;
 }
-
 
 export function modificarCliente() {
   const data = leerDatos();

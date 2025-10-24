@@ -27,7 +27,7 @@ export function menu() {
   while (menuActivo.activo) {
     let opcion = prompt(
       chalk.blue(
-        'Ingrese la contraseña de administrador (o Enter para menú usuario): '
+        'Si usted es administrador, ingrese la contraseña. Sino, presione enter: '
       )
     );
 

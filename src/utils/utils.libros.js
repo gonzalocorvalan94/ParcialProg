@@ -1,4 +1,4 @@
-import { leerDatos, guardar } from '../db/fileManager.js';
+import { leerDatos } from '../db/fileManager.js';
 
 export function getLibrobyID(id) {
   const data = leerDatos();
@@ -7,8 +7,10 @@ export function getLibrobyID(id) {
   const index = data.libros.findIndex((libro) => libro.id == input);
   return { libro: libro, index: index };
 }
+
 export function createID() {
   const data = leerDatos();
-  const newIndex = data.libros[data.libros.length - 1].id + 1;
+  const newIndex =
+    data.libros.length > 0 ? Math.max(...data.libros.map((l) => l.id)) + 1 : 1;
   return newIndex;
 }

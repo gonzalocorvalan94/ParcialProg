@@ -37,6 +37,12 @@
       "dni": "87654321",
       "telefono": "333444",
       "direccion": "Av. Siempreviva 742"
+    },
+    {
+      "nombre": "mou",
+      "dni": "23000456",
+      "telefono": "5411445566",
+      "direccion": "sarmiento 33"
     }
   ],
   "prestamos": [

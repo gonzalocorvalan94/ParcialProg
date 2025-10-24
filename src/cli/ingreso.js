@@ -11,20 +11,14 @@ export function ingreso(DNIingresado) {
 
   if (!usuario) {
     console.log(chalk.blue('Usted no se encuentra registrado. Vamos a hacerlo'));
-    const resultado = registrarCliente();
+    const resultado = registrarCliente(DNIingresado); // 
 
     if (resultado === false) {
       console.log(chalk.yellow('Operación cancelada. Volviendo al inicio...'));
       return null;
     }
 
-    const dataActualizado = leerDatos();
-    usuario = dataActualizado.clientes.find((u) => u.dni === DNIingresado);
-  }
-
-  if (!usuario) {
-    console.log(chalk.red('No se pudo registrar el usuario.'));
-    return null;
+    usuario = resultado; 
   }
 
   console.log(chalk.blue(`Bienvenido, ${usuario.nombre}!`));

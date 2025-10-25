@@ -13,16 +13,16 @@
       "titulo": "1984",
       "autor": "George Orwell",
       "genero": "Ciencia Ficción",
-      "stock": 3,
+      "stock": 0,
       "precio": 1000
     },
     {
       "id": 4,
       "titulo": "La selva",
-      "autor": "Juan Perez",
-      "genero": "Cuento",
-      "stock": 5,
-      "precio": 5000
+      "autor": "Juan Garcia",
+      "genero": "Cuentito",
+      "stock": 6,
+      "precio": 6000
     }
   ],
   "clientes": [
@@ -43,6 +43,12 @@
       "dni": "23000456",
       "telefono": "5411445566",
       "direccion": "sarmiento 33"
+    },
+    {
+      "nombre": "Gonzalo",
+      "dni": "38426616",
+      "telefono": "2281462103",
+      "direccion": "asd 123"
     }
   ],
   "prestamos": [

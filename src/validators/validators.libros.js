@@ -107,10 +107,23 @@ export function validarDireccion(direccion) {
   return true;
 }
 
-export function validarFecha(fecha) {
+export function validarFechaDevolucion(fecha) {
   const regex = /^\d{2}\/\d{2}\/\d{4}$/; // DD/MM/AAAA
   if (!regex.test(fecha)) {
-    console.error(chalk.red('Fecha no válida. Formato esperado: DD/MM/AAAA'));
+    console.error(chalk.red('Fecha inválida. Formato esperado: DD/MM/AAAA'));
+    return false;
+  }
+
+  const [dia, mes, anio] = fecha.split('/').map(Number);
+  const fechaIngresada = new Date(anio, mes - 1, dia);
+
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  if (fechaIngresada.getTime() <= hoy.getTime()) {
+    console.error(
+      chalk.red('La fecha de devolución debe ser posterior al día de hoy.')
+    );
     return false;
   }
 

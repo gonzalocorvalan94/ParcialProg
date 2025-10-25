@@ -1,13 +1,13 @@
 // service.libros.js
-import chalk from 'chalk';
-import PromptSync from 'prompt-sync';
-import { leerDatos, guardar } from '../db/fileManager.js';
-import { Prestamo } from '../model/libros.models.js';
+import chalk from "chalk";
+import PromptSync from "prompt-sync";
+import { leerDatos, guardar } from "../db/fileManager.js";
+import { Prestamo } from "../model/libros.models.js";
 import {
   validarTitulo,
   validarFechaDevolucion,
   validar,
-} from '../validators/validators.libros.js';
+} from "../validators/validators.libros.js";
 
 const prompt = PromptSync();
 
@@ -16,12 +16,12 @@ export function crearPrestamo(usuario) {
   const cliente = data.clientes.find((c) => c.dni === usuario.dni);
 
   if (!cliente) {
-    console.log(chalk.red('Cliente no encontrado.'));
+    console.log(chalk.red("Cliente no encontrado."));
     return;
   }
 
   const tituloLibro = validar(
-    'Ingrese el título del libro que desea: ',
+    "Ingrese el título del libro que desea ",
     validarTitulo
   );
   const libro = data.libros.find(
@@ -29,27 +29,26 @@ export function crearPrestamo(usuario) {
   );
 
   if (!libro) {
-    console.log(chalk.red('Libro no encontrado'));
+    console.log(chalk.red("Libro no encontrado"));
     return;
   }
 
   if (libro.stock <= 0) {
-    console.log(chalk.red('No hay stock disponible para este libro.'));
+    console.log(chalk.red("No hay stock disponible para este libro."));
     return;
   }
 
   libro.stock--; // Reducir stock
 
   const hoy = new Date();
-  const dia = String(hoy.getDate()).padStart(2, '0');
-  const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+  const dia = String(hoy.getDate()).padStart(2, "0");
+  const mes = String(hoy.getMonth() + 1).padStart(2, "0");
   const anio = hoy.getFullYear();
 
   const fechaPrestamo = `${dia}/${mes}/${anio}`;
 
-
   const fechaDevolucion = validar(
-    'la fecha de devolución (DD/MM/AAAA): ',
+    "la fecha de devolución (DD/MM/AAAA): ",
     validarFechaDevolucion
   );
 
@@ -79,12 +78,12 @@ export function devolverLibro(usuario) {
   const cliente = data.clientes.find((c) => c.dni === usuario.dni);
 
   if (!cliente) {
-    console.log(chalk.red('Cliente no encontrado.'));
+    console.log(chalk.red("Cliente no encontrado."));
     return;
   }
 
   const tituloLibro = validar(
-    'Ingrese título del libro a devolver: ',
+    "Ingrese título del libro a devolver: ",
     validarTitulo
   );
   const indicePrestamo = data.prestamos.findIndex(
@@ -93,7 +92,7 @@ export function devolverLibro(usuario) {
 
   if (indicePrestamo === -1) {
     console.log(
-      chalk.red('No se encontró un préstamo para este cliente con ese libro.')
+      chalk.red("No se encontró un préstamo para este cliente con ese libro.")
     );
     return;
   }
@@ -102,7 +101,7 @@ export function devolverLibro(usuario) {
     (l) => l.titulo.toLowerCase() === tituloLibro.toLowerCase()
   );
   if (!libroReal) {
-    console.log(chalk.red('No se encontró el libro en la base de datos.'));
+    console.log(chalk.red("No se encontró el libro en la base de datos."));
     return;
   }
 
@@ -116,7 +115,7 @@ export function devolverLibro(usuario) {
 export function listarPrestamos() {
   const data = leerDatos();
   if (!data.prestamos || data.prestamos.length === 0) {
-    console.log(chalk.red('No hay préstamos registrados.'));
+    console.log(chalk.red("No hay préstamos registrados."));
     return;
   }
   console.table(data.prestamos);

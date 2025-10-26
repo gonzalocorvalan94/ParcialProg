@@ -5,7 +5,7 @@ import { leerDatos, guardar } from '../db/fileManager.js';
 import { Prestamo } from '../model/libros.models.js';
 import {
   validarTitulo,
-  validarFecha,
+  validarFechaDevolucion,
   validar,
 } from '../validators/validators.libros.js';
 
@@ -40,22 +40,29 @@ export function crearPrestamo(usuario) {
 
   libro.stock--; // Reducir stock
 
-  const fechaEntrega = validar(
-    'Ingrese la fecha de entrega (DD/MM/AAAA): ',
-    validarFecha
-  );
+  const hoy = new Date();
+  const dia = String(hoy.getDate()).padStart(2, '0');
+  const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+  const anio = hoy.getFullYear();
+
+  const fechaPrestamo = `${dia}/${mes}/${anio}`;
+
+
   const fechaDevolucion = validar(
-    'Ingrese la fecha de devolución (DD/MM/AAAA): ',
-    validarFecha
+    'la fecha de devolución (DD/MM/AAAA): ',
+    validarFechaDevolucion
   );
 
+  const nuevoId =
+    data.prestamos.length > 0
+      ? Math.max(...data.prestamos.map((p) => p.id)) + 1
+      : 1;
+
   const nuevoPrestamo = new Prestamo(
-    data.prestamos.length
-      ? data.prestamos[data.prestamos.length - 1].id + 1
-      : 1,
+    nuevoId,
     cliente,
-    libro, // pasamos solo un libro
-    fechaEntrega,
+    libro,
+    fechaPrestamo,
     fechaDevolucion
   );
 

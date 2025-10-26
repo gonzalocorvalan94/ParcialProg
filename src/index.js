@@ -1,3 +1,3 @@
-import { menu } from "./cli/menu.js";
+import { menu } from './cli/menu.js';
 
 menu();

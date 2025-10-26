@@ -1,9 +1,6 @@
-// validadores
-// el validador retornara true o false
 import chalk from 'chalk';
-import { type } from 'os';
+
 import PromptSync from 'prompt-sync';
-import { PASSWORD } from '../utils/constantes.js';
 
 const prompt = PromptSync();
 
@@ -110,20 +107,23 @@ export function validarDireccion(direccion) {
   return true;
 }
 
-export function validarFecha(fecha) {
+export function validarFechaDevolucion(fecha) {
   const regex = /^\d{2}\/\d{2}\/\d{4}$/; // DD/MM/AAAA
   if (!regex.test(fecha)) {
-    console.error(chalk.red('Fecha no válida. Formato esperado: DD/MM/AAAA'));
+    console.error(chalk.red('Fecha inválida. Formato esperado: DD/MM/AAAA'));
     return false;
   }
 
-  return true;
-}
+  const [dia, mes, anio] = fecha.split('/').map(Number);
+  const fechaIngresada = new Date(anio, mes - 1, dia);
 
-export function validarFecha(fecha) {
-  const regex = /^\d{2}\/\d{2}\/\d{4}$/; // DD/MM/AAAA
-  if (!regex.test(fecha)) {
-    console.error(chalk.red('Fecha no válida. Formato esperado: DD/MM/AAAA'));
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+
+  if (fechaIngresada.getTime() <= hoy.getTime()) {
+    console.error(
+      chalk.red('La fecha de devolución debe ser posterior al día de hoy.')
+    );
     return false;
   }
 
@@ -134,7 +134,7 @@ export function validarDNI(DNI) {
   const clean = DNI.trim();
   const validos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-  if (clean.length <= 7) {
+  if (clean.length < 7) {
     console.error(chalk.red('DNI inválido'));
     return false;
   }
@@ -151,7 +151,7 @@ export function validarDNI(DNI) {
 export function validarPrecio(precio) {
   let clean = Number(precio);
   if (!clean || clean <= 0) {
-    console.error(chalk.red('Precio no valido'));
+    console.error(chalk.red('Precio inválido'));
     return false;
   }
   return true;
@@ -159,7 +159,7 @@ export function validarPrecio(precio) {
 export function validarStock(stock) {
   let clean = Number(stock);
   if (!clean || clean <= 0) {
-    console.error(chalk.red('Stock no valido'));
+    console.error(chalk.red('Stock inválido'));
 
     return false;
   }
@@ -177,7 +177,7 @@ export function validar(datoValidar, validador) {
 export function validarID(id) {
   const num = Number(id);
   if (!num || num <= 0) {
-    console.error(chalk.red('ID no válido'));
+    console.error(chalk.red('ID inválido'));
     return false;
   }
   return true;

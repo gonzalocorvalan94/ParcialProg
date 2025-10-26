@@ -32,21 +32,12 @@ export function listarUsuarios() {
   });
 }
 
-export function registrarCliente() {
+export function registrarCliente(dniExistente) {
   const data = leerDatos();
 
   const nombre = validar('nombre del usuario', validarNombre);
 
-  let dni;
-  while (true) {
-    dni = validar('DNI del usuario', validarDNI);
-
-    if (data.clientes.some((c) => c.dni === dni)) {
-      console.log(chalk.red('Ya existe un cliente con ese DNI. Intente otro.'));
-    } else {
-      break;
-    }
-  }
+  const dni = dniExistente;
 
   const telefono = validar('teléfono del usuario', validarNumero);
   const direccion = validar('dirección del usuario', validarDireccion);
@@ -54,6 +45,7 @@ export function registrarCliente() {
   const confirmacion = prompt(
     chalk.red('¿Está seguro que desea registrar el usuario? (s/n): ')
   );
+
   if (confirmacion.toLowerCase() !== 's') {
     console.log(chalk.blue('Operación cancelada'));
     return false;
@@ -64,6 +56,7 @@ export function registrarCliente() {
   guardar(data);
 
   console.log(chalk.green('Se creó el cliente correctamente'));
+  return nuevoCliente;
 }
 
 export function modificarCliente() {

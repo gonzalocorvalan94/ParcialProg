@@ -109,6 +109,3 @@ export function eliminarLibro() {
     return false;
   }
 }
-
-
-

@@ -28,7 +28,7 @@ export function mostrarMenuAdmin() {
 export function manejarMenuAdmin() {
   let seguirEnAdmin = true;
 
-  mostrarMenuAdmin(); 
+  mostrarMenuAdmin();
 
   while (seguirEnAdmin) {
     let opcion_admin = prompt(chalk.blue('Ingrese una opción: '));

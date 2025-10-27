@@ -13,15 +13,39 @@
       "titulo": "1984",
       "autor": "George Orwell",
       "genero": "Ciencia Ficción",
-      "stock": 3,
+      "stock": 0,
       "precio": 1000
     },
     {
       "id": 4,
-      "titulo": "La selva",
-      "autor": "Juan Perez",
-      "genero": "Cuento",
-      "stock": 5,
+      "titulo": " La selva",
+      "autor": "Juan Garcia",
+      "genero": "infaltil",
+      "stock": 6,
+      "precio": 850
+    },
+    {
+      "id": 5,
+      "titulo": "Alicia",
+      "autor": "Lewis Carroll",
+      "genero": "Infantil",
+      "stock": 6,
+      "precio": 1000
+    },
+    {
+      "id": 6,
+      "titulo": "El psiconalista",
+      "autor": "John Kalzenbach",
+      "genero": "suspenso",
+      "stock": 3,
+      "precio": 2000
+    },
+    {
+      "id": 7,
+      "titulo": "El visitante",
+      "autor": "Stephen King",
+      "genero": "terror",
+      "stock": 8,
       "precio": 5000
     }
   ],
@@ -37,6 +61,24 @@
       "dni": "87654321",
       "telefono": "333444",
       "direccion": "Av. Siempreviva 742"
+    },
+    {
+      "nombre": "mou",
+      "dni": "23000456",
+      "telefono": "5411445566",
+      "direccion": "sarmiento 33"
+    },
+    {
+      "nombre": "Gonzalo",
+      "dni": "38426616",
+      "telefono": "2281462103",
+      "direccion": "asd 123"
+    },
+    {
+      "nombre": "Serenna",
+      "dni": "45629888",
+      "telefono": "25665488",
+      "direccion": "Viivi 555"
     }
   ],
   "prestamos": [
@@ -55,6 +97,14 @@
       "fechaEntrega": "22/9/2025",
       "fechaDevolucion": "5/10/2025",
       "total": 800
+    },
+    {
+      "id": 3,
+      "cliente": "Serenna",
+      "libros": "Alicia",
+      "fechaEntrega": "25/10/2025",
+      "fechaDevolucion": "26/10/2025",
+      "total": 1000
     }
   ]
 }

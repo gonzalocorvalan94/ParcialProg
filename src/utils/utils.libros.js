@@ -1,4 +1,4 @@
-import { leerDatos, guardar } from "../db/fileManager.js"
+import { leerDatos } from "../db/fileManager.js"
 
 export function getLibrobyID(id) {
 	const data = leerDatos()

@@ -29,7 +29,7 @@
       "titulo": "Alicia",
       "autor": "Lewis Carroll",
       "genero": "Infantil",
-      "stock": 6,
+      "stock": 5,
       "precio": 1000
     },
     {
@@ -104,6 +104,14 @@
       "libros": "Alicia",
       "fechaEntrega": "25/10/2025",
       "fechaDevolucion": "26/10/2025",
+      "total": 1000
+    },
+    {
+      "id": 4,
+      "cliente": "Serenna",
+      "libros": "Alicia",
+      "fechaEntrega": "27/10/2025",
+      "fechaDevolucion": "28/10/2025",
       "total": 1000
     }
   ]

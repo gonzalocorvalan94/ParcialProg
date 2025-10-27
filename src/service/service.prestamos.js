@@ -8,6 +8,8 @@ import {
   validarFechaDevolucion,
   validar,
 } from "../validators/validators.libros.js";
+import { generarFechaActual } from "../utils/utils.libros.js";
+import { createID } from "../utils/utils.libros.js";
 
 const prompt = PromptSync();
 
@@ -40,22 +42,14 @@ export function crearPrestamo(usuario) {
 
   libro.stock--; // Reducir stock
 
-  const hoy = new Date();
-  const dia = String(hoy.getDate()).padStart(2, "0");
-  const mes = String(hoy.getMonth() + 1).padStart(2, "0");
-  const anio = hoy.getFullYear();
-
-  const fechaPrestamo = `${dia}/${mes}/${anio}`;
+  const fechaPrestamo = generarFechaActual();
 
   const fechaDevolucion = validar(
     "la fecha de devolución (DD/MM/AAAA): ",
     validarFechaDevolucion
   );
 
-  const nuevoId =
-    data.prestamos.length > 0
-      ? Math.max(...data.prestamos.map((p) => p.id)) + 1
-      : 1;
+  const nuevoId = createID("prestamos");
 
   const nuevoPrestamo = new Prestamo(
     nuevoId,

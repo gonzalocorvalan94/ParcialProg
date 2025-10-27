@@ -1,4 +1,4 @@
-import { leerDatos } from '../db/fileManager.js';
+import { leerDatos } from "../db/fileManager.js";
 
 export function getLibrobyID(id) {
   const data = leerDatos();
@@ -7,10 +7,16 @@ export function getLibrobyID(id) {
   const index = data.libros.findIndex((libro) => libro.id == input);
   return { libro: libro, index: index };
 }
-
-export function createID() {
+export function createID(campo) {
+  //Campo debe corresponder a un valor del objeto .json EJ: "libros", "prestamos"
   const data = leerDatos();
-  const newIndex =
-    data.libros.length > 0 ? Math.max(...data.libros.map((l) => l.id)) + 1 : 1;
+  const array = data[campo];
+  let newIndex = 0;
+  if (!Array.isArray(array) || array.length === 0) {
+    newIndex = 1;
+  } else {
+    const ultimoId = array[array.length - 1].id;
+    newIndex = ultimoId + 1;
+  }
   return newIndex;
 }

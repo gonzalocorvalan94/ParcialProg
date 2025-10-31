@@ -13,7 +13,7 @@
       "titulo": "1984",
       "autor": "George Orwell",
       "genero": "Ciencia Ficción",
-      "stock": 0,
+      "stock": 2,
       "precio": 1000
     },
     {
@@ -112,6 +112,30 @@
       "libros": "Alicia",
       "fechaEntrega": "27/10/2025",
       "fechaDevolucion": "28/10/2025",
+      "total": 1000
+    },
+    {
+      "id": 5,
+      "cliente": "Gonzalo",
+      "libros": "1984",
+      "fechaEntrega": "31/10/2025",
+      "fechaDevolucion": "20/13/2026",
+      "total": 1000
+    },
+    {
+      "id": 6,
+      "cliente": "Gonzalo",
+      "libros": "1984",
+      "fechaEntrega": "31/10/2025",
+      "fechaDevolucion": "12/09/2026",
+      "total": 1000
+    },
+    {
+      "id": 7,
+      "cliente": "Gonzalo",
+      "libros": "1984",
+      "fechaEntrega": "31/10/2025",
+      "fechaDevolucion": "5/9/2026",
       "total": 1000
     }
   ]

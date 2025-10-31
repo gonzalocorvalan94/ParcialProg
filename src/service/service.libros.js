@@ -58,7 +58,7 @@ export function agregarLibro() {
   guardar(data);
   console.table(data.libros);
 
-  console.log(chalk.green("¡Usuario creado correctamente!"));
+  console.log(chalk.green("¡Libro creado correctamente!"));
   return true;
 }
 
@@ -81,7 +81,7 @@ export function modificarLibro() {
     guardar(data);
     console.table(data.libros);
 
-    console.log(chalk.green("¡Usuario modificado correctamente!"));
+    console.log(chalk.green("¡Libro modificado correctamente!"));
 
     return true;
   } else {
@@ -101,7 +101,7 @@ export function eliminarLibro() {
     console.table(data.libros);
     guardar(data);
     console.table(data.libros);
-    console.log(chalk.green("¡Usuario eliminado correctamente!"));
+    console.log(chalk.green("¡Libro eliminado correctamente!"));
 
     return true;
   } else {

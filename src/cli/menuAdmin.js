@@ -7,6 +7,7 @@ import {
   listarLibros,
   modificarLibro,
 } from '../service/service.libros.js';
+import { eliminarCliente, listarUsuarios, modificarCliente } from '../service/service.clientes.js';
 
 const prompt = PromptSync();
 
@@ -18,9 +19,12 @@ export function mostrarMenuAdmin() {
   2. Agregar libro
   3. Modificar libro
   4. Eliminar libro
-  5. Listar Prestamos
-  6. Volver al menu anterior
-  7. Salir
+  5. Listar prestamos
+  6. Listar clientes
+  7. Modificar clientes
+  8. Eliminar clientes
+  9. Volver al menu anterior
+  10. Salir
   `)
   );
 }
@@ -55,9 +59,21 @@ export function manejarMenuAdmin() {
         mostrarMenuAdmin();
         break;
       case '6':
-        seguirEnAdmin = false;
+        listarUsuarios();
+        mostrarMenuAdmin();
         break;
       case '7':
+        modificarCliente();
+        mostrarMenuAdmin();
+        break;
+      case '8':
+        eliminarCliente();
+        mostrarMenuAdmin();
+        break;
+      case '9':
+        seguirEnAdmin = false;
+        break;
+      case '10':
         console.log(chalk.green('Hasta luego!'));
         return false;
       default:

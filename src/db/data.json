@@ -13,7 +13,7 @@
       "titulo": "1984",
       "autor": "George Orwell",
       "genero": "Ciencia Ficción",
-      "stock": 3,
+      "stock": 2,
       "precio": 1000
     },
     {
@@ -69,16 +69,16 @@
       "direccion": "sarmiento 33"
     },
     {
-      "nombre": "Gonzalo",
-      "dni": "38426616",
-      "telefono": "2281462103",
-      "direccion": "asd 123"
-    },
-    {
       "nombre": "Serenna",
       "dni": "45629888",
       "telefono": "25665488",
       "direccion": "Viivi 555"
+    },
+    {
+      "nombre": "Gonzalo",
+      "dni": "38426616",
+      "telefono": "2281462103",
+      "direccion": "asd 123"
     }
   ],
   "prestamos": [
@@ -128,6 +128,14 @@
       "libros": "1984",
       "fechaEntrega": "31/10/2025",
       "fechaDevolucion": "5/9/2026",
+      "total": 1000
+    },
+    {
+      "id": 8,
+      "cliente": "Gonzalo",
+      "libros": "1984",
+      "fechaEntrega": "31/10/2025",
+      "fechaDevolucion": "1/11/2025",
       "total": 1000
     }
   ]

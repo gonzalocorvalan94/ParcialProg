@@ -18,7 +18,7 @@
     },
     {
       "id": 4,
-      "titulo": " La selva",
+      "titulo": "La selva",
       "autor": "Juan Garcia",
       "genero": "infaltil",
       "stock": 6,
@@ -79,6 +79,12 @@
       "dni": "38426616",
       "telefono": "2281462103",
       "direccion": "asd 123"
+    },
+    {
+      "nombre": "Candela Corvalan",
+      "dni": "42177358",
+      "telefono": "2281479263",
+      "direccion": "Roca 149"
     }
   ],
   "prestamos": [

@@ -21,15 +21,14 @@ export function listarUsuarios() {
     return;
   }
 
-  clientes.forEach((usuario, index) => {
-    console.log(
-      chalk.blue(
-        `${index + 1}. ${usuario.nombre} - DNI: ${usuario.dni} - Tel: ${
-          usuario.telefono
-        } - Dirección: ${usuario.direccion}`
-      )
-    );
-  });
+  console.table(
+    clientes.map((usuario) => ({
+      Nombre: usuario.nombre,
+      DNI: usuario.dni,
+      Teléfono: usuario.telefono,
+      Dirección: usuario.direccion,
+    }))
+  );
 }
 
 export function registrarCliente(dniExistente) {
@@ -47,7 +46,6 @@ export function registrarCliente(dniExistente) {
   );
 
   if (confirmacion.toLowerCase() !== 's') {
-    console.log(chalk.blue('Operación cancelada'));
     return false;
   }
 
@@ -72,7 +70,25 @@ export function modificarCliente() {
   }
 
   const nombre = validar('nombre del usuario', validarNombre);
-  const nuevoDNI = validar('DNI del usuario', validarDNI);
+
+  // Validar DNI: que sea válido y que no exista en otro cliente
+  let nuevoDNI;
+  while (true) {
+    nuevoDNI = validar('DNI del usuario', validarDNI);
+
+    // Si el DNI ingresado pertenece al mismo usuario que estamos modificando, está ok
+    // Sino, verificamos que no exista en otro cliente
+    const dniExiste = data.clientes.some(
+      (c, i) => c.dni === nuevoDNI && i !== index
+    );
+
+    if (dniExiste) {
+      console.log(chalk.red('Ese DNI ya pertenece a otro usuario. Intente otro.'));
+    } else {
+      break; // DNI válido y único
+    }
+  }
+
   const telefono = validar('teléfono del usuario', validarNumero);
   const direccion = validar('dirección del usuario', validarDireccion);
 
@@ -90,6 +106,7 @@ export function modificarCliente() {
 
   console.log(chalk.green('Usuario modificado correctamente'));
 }
+
 
 export function eliminarCliente() {
   const data = leerDatos();

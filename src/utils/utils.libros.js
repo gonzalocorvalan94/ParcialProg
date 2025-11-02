@@ -7,10 +7,21 @@ export function getLibrobyID(id) {
   const index = data.libros.findIndex((libro) => libro.id == input);
   return { libro: libro, index: index };
 }
-
-export function createID() {
+export function createID(campo) {
   const data = leerDatos();
-  const newIndex =
-    data.libros.length > 0 ? Math.max(...data.libros.map((l) => l.id)) + 1 : 1;
-  return newIndex;
+  const array = data[campo];
+
+  const newId =
+    array.length > 0 ? Math.max(...array.map((item) => item.id)) + 1 : 1;
+
+  return newId;
+}
+
+export function generarFechaActual() {
+  const hoy = new Date();
+  const dia = String(hoy.getDate()).padStart(2, '0');
+  const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+  const anio = hoy.getFullYear();
+
+  return `${dia}/${mes}/${anio}`;
 }

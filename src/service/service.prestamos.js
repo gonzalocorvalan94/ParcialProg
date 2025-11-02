@@ -8,6 +8,8 @@ import {
   validarFechaDevolucion,
   validar,
 } from '../validators/validators.libros.js';
+import { generarFechaActual } from '../utils/utils.libros.js';
+import { createID } from '../utils/utils.libros.js';
 
 const prompt = PromptSync();
 
@@ -21,9 +23,10 @@ export function crearPrestamo(usuario) {
   }
 
   const tituloLibro = validar(
-    'Ingrese el título del libro que desea: ',
+    'Ingrese el título del libro que desea ',
     validarTitulo
   );
+
   const libro = data.libros.find(
     (l) => l.titulo.toLowerCase() === tituloLibro.toLowerCase()
   );
@@ -40,23 +43,14 @@ export function crearPrestamo(usuario) {
 
   libro.stock--; // Reducir stock
 
-  const hoy = new Date();
-  const dia = String(hoy.getDate()).padStart(2, '0');
-  const mes = String(hoy.getMonth() + 1).padStart(2, '0');
-  const anio = hoy.getFullYear();
-
-  const fechaPrestamo = `${dia}/${mes}/${anio}`;
-
+  const fechaPrestamo = generarFechaActual();
 
   const fechaDevolucion = validar(
     'la fecha de devolución (DD/MM/AAAA): ',
     validarFechaDevolucion
   );
 
-  const nuevoId =
-    data.prestamos.length > 0
-      ? Math.max(...data.prestamos.map((p) => p.id)) + 1
-      : 1;
+  const nuevoId = createID('prestamos');
 
   const nuevoPrestamo = new Prestamo(
     nuevoId,
@@ -70,7 +64,9 @@ export function crearPrestamo(usuario) {
   guardar(data);
 
   console.log(
-    chalk.green(`Prestamo creado correctamente para ${cliente.nombre}`)
+    chalk.green(
+      `Préstamo creado correctamente para ${cliente.nombre}. El precio es de $${libro.precio}`
+    )
   );
 }
 

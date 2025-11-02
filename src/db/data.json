@@ -13,12 +13,12 @@
       "titulo": "1984",
       "autor": "George Orwell",
       "genero": "Ciencia Ficción",
-      "stock": 0,
+      "stock": 2,
       "precio": 1000
     },
     {
       "id": 4,
-      "titulo": " La selva",
+      "titulo": "La selva",
       "autor": "Juan Garcia",
       "genero": "infaltil",
       "stock": 6,
@@ -29,7 +29,7 @@
       "titulo": "Alicia",
       "autor": "Lewis Carroll",
       "genero": "Infantil",
-      "stock": 6,
+      "stock": 5,
       "precio": 1000
     },
     {
@@ -69,16 +69,22 @@
       "direccion": "sarmiento 33"
     },
     {
+      "nombre": "Serenna",
+      "dni": "45629888",
+      "telefono": "25665488",
+      "direccion": "Viivi 555"
+    },
+    {
       "nombre": "Gonzalo",
       "dni": "38426616",
       "telefono": "2281462103",
       "direccion": "asd 123"
     },
     {
-      "nombre": "Serenna",
-      "dni": "45629888",
-      "telefono": "25665488",
-      "direccion": "Viivi 555"
+      "nombre": "Candela Corvalan",
+      "dni": "42177358",
+      "telefono": "2281479263",
+      "direccion": "Roca 149"
     }
   ],
   "prestamos": [
@@ -104,6 +110,38 @@
       "libros": "Alicia",
       "fechaEntrega": "25/10/2025",
       "fechaDevolucion": "26/10/2025",
+      "total": 1000
+    },
+    {
+      "id": 4,
+      "cliente": "Serenna",
+      "libros": "Alicia",
+      "fechaEntrega": "27/10/2025",
+      "fechaDevolucion": "28/10/2025",
+      "total": 1000
+    },
+    {
+      "id": 6,
+      "cliente": "Gonzalo",
+      "libros": "1984",
+      "fechaEntrega": "31/10/2025",
+      "fechaDevolucion": "12/09/2026",
+      "total": 1000
+    },
+    {
+      "id": 7,
+      "cliente": "Gonzalo",
+      "libros": "1984",
+      "fechaEntrega": "31/10/2025",
+      "fechaDevolucion": "5/9/2026",
+      "total": 1000
+    },
+    {
+      "id": 8,
+      "cliente": "Gonzalo",
+      "libros": "1984",
+      "fechaEntrega": "31/10/2025",
+      "fechaDevolucion": "1/11/2025",
       "total": 1000
     }
   ]

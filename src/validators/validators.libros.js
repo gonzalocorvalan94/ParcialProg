@@ -108,17 +108,29 @@ export function validarDireccion(direccion) {
 }
 
 export function validarFechaDevolucion(fecha) {
-  const regex = /^\d{2}\/\d{2}\/\d{4}$/; // DD/MM/AAAA
+  const regex = /^\d{1,2}\/\d{1,2}\/\d{4}$/; // DD/MM/AAAA, acepta 1 o 2 dígitos en día y mes
   if (!regex.test(fecha)) {
     console.error(chalk.red('Fecha inválida. Formato esperado: DD/MM/AAAA'));
     return false;
   }
 
-  const [dia, mes, anio] = fecha.split('/').map(Number);
-  const fechaIngresada = new Date(anio, mes - 1, dia);
+  let [dia, mes, anio] = fecha.split('/').map(Number);
 
+  if (mes < 1 || mes > 12) {
+    console.error(chalk.red('La fecha debe tener un mes válido (1-12).'));
+    return false;
+  }
+
+  const diasEnMes = new Date(anio, mes, 0).getDate(); // esto agarra el ultimo dia del mes que se ingreso, porque sino el 31 podria no ser valido en octubre si ponemos <30 o poner un 31 en febrero por ejemplo.
+
+  if (dia < 1 || dia > diasEnMes) {
+    console.error(chalk.red('La fecha debe tener un día válido para ese mes.'));
+    return false;
+  }
+
+  const fechaIngresada = new Date(anio, mes - 1, dia);
   const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
+  hoy.setHours(0, 0, 0, 0); // seteamos la hora en 0 para evitar problemas con los milisegundos de new date
 
   if (fechaIngresada.getTime() <= hoy.getTime()) {
     console.error(
@@ -127,8 +139,16 @@ export function validarFechaDevolucion(fecha) {
     return false;
   }
 
-  return true;
+  // Normalizamos la fecha agregando ceros con padStart. Sino habia que poner 12/09/2025. ahora 12/9/2025 lo acepta y lo formatea el PadStart
+  const fechaFormateada = [
+    String(dia).padStart(2, '0'),
+    String(mes).padStart(2, '0'),
+    anio,
+  ].join('/');
+
+  return fechaFormateada;
 }
+
 
 export function validarDNI(DNI) {
   const clean = DNI.trim();

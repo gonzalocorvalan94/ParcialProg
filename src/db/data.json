@@ -85,6 +85,12 @@
       "dni": "42177358",
       "telefono": "2281479263",
       "direccion": "Roca 149"
+    },
+    {
+      "nombre": "Juan",
+      "dni": "21324322",
+      "telefono": "123456",
+      "direccion": "Hola 123"
     }
   ],
   "prestamos": [
